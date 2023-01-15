@@ -446,9 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff287c3a3f539742b700e7de50a73f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8098687726029102934, guid: 03176d6a79a576e458391267b227dd2e, type: 3}
-  bulletSpawn: {fileID: 4261499839070514179}
-  bulletLifetime: 2
+  bulletCasingPrefab: {fileID: 0}
+  bulletCasingSpawn: {fileID: 0}
+  bulletCasingLifeTime: 2
 --- !u!114 &4704669670279889014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e127a5e7be72af143a16d785a2633125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletCasingPrefab: {fileID: 8098687726029102934, guid: 03176d6a79a576e458391267b227dd2e, type: 3}
+  bulletCasingSpawn: {fileID: 4261499839070514179}
+  bulletCasingLifetime: 2
   bulletPrefab: {fileID: 8074845926922266155, guid: 42f74aa62ed9ea145b5e120f5648da56, type: 3}
   bulletSpawn: {fileID: 1046048469337833944}
   bulletSpeed: 100
   bulletLifetime: 2
+  lastClickTime: 0
