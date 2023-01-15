@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
+    [SerializeField]
+    private float bulletCount;
+
     // for bullet casing effect
     public GameObject bulletCasingPrefab;
     public Transform bulletCasingSpawn;
-    public float bulletCasingLifetime = 2f;
 
     // actual weapon effect
     public GameObject bulletPrefab;
@@ -21,14 +23,22 @@ public class BulletSpawnScript : MonoBehaviour
     void Start()
     {
         globalWeaponList.Add(
-            new WeaponClass(weaponType: WeaponType.Sidearm, 10, 8, "glock", 1f));
+            new WeaponClass(weaponType: WeaponType.Sidearm, 10, 8, "glock", .2f, 3f));
         currentWeapon = globalWeaponList[0];
+        bulletCount = currentWeapon.magazineSize;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        // check ammo count
+        if (bulletCount == 0)
         {
+            if (Time.time - lastClickTime >= currentWeapon.reloadTime)
+            {
+                bulletCount = currentWeapon.magazineSize;
+            }
+        } else if (Input.GetMouseButtonDown(0)) { 
+            bulletCount -= 1;
             if(Time.time - lastClickTime > currentWeapon.fireRate)
             {
                 lastClickTime = Time.time;
@@ -36,13 +46,12 @@ public class BulletSpawnScript : MonoBehaviour
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
                 GetComponent<AudioSource>().Play();
-                Destroy(bullet, bulletLifetime);
 
                 // trigger bullet casing effect
                 GameObject bulletCasing = Instantiate(bulletCasingPrefab, bulletCasingSpawn.position, bulletCasingSpawn.rotation);
-                Rigidbody bulletCasingrb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(bulletCasingPrefab.transform.forward);
-                Destroy(bullet, bulletCasingLifetime);
+                Destroy(bullet, bulletLifetime);
+                Destroy(bulletCasing, bulletLifetime);
             }
         }
     }
