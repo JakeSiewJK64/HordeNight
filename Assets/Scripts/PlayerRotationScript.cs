@@ -8,6 +8,6 @@ public class PlayerRotationScript : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
-        transform.Rotate(Vector3.up * mouseX);
+        transform.Rotate(0f,mouseX,0f);
     }
 }
