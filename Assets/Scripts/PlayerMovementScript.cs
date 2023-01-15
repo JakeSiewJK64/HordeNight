@@ -25,8 +25,16 @@ public class PlayerMovementScript : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if(shiftPressed)
+        {
+            controller.Move(move * Time.deltaTime * (playerSpeed * 2));
+        } else
+        {
+            controller.Move(move * Time.deltaTime * (playerSpeed));
+        }
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer)
@@ -35,7 +43,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move(playerVelocity * Time.deltaTime);       
     }
 
     private void OnCollisionEnter(Collision collision)
