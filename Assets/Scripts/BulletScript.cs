@@ -14,12 +14,13 @@ public class BulletScript : MonoBehaviour
 
     private void HandleEnvironment(Collision obj)
     {
+        Destroy(gameObject);
     }
 
     private void HandleZombies(Collision obj)
     {
         Destroy(obj.gameObject);
-        Debug.Log("Zombie Hit");
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
