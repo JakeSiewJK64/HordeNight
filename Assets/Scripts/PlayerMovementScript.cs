@@ -46,12 +46,4 @@ public class PlayerMovementScript : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);       
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.layer == 6)
-        {
-            Debug.Log("hit ground!");
-        }
-         
-    }
 }

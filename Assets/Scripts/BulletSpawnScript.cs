@@ -33,7 +33,7 @@ public class BulletSpawnScript : MonoBehaviour
     void Start()
     {
         globalWeaponList.Add(
-            new WeaponClass(WeaponType.Sidearm, 10, 8, "glock", .2f, 3f, "glock.mp3", "glock_reload.mp3"));
+            new WeaponClass(WeaponType.Sidearm, 50, 8, "glock", .2f, 2f, "glock.mp3", "glock_reload.mp3"));
         currentWeapon = globalWeaponList[0];
         bulletCount = currentWeapon.magazineSize;
 
@@ -59,7 +59,7 @@ public class BulletSpawnScript : MonoBehaviour
     void Reload()
     {
         bulletCount = currentWeapon.magazineSize;
-        this.playWeaponSound(reloadSound);        
+        playWeaponSound(reloadSound);        
     }
 
     private void Shoot()
@@ -70,12 +70,14 @@ public class BulletSpawnScript : MonoBehaviour
             {
                 bulletCount -= 1;
                 lastClickTime = Time.time;
+
+                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage;
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
 
                 // play shoot sound
-                this.playWeaponSound(shootingSound);
+                playWeaponSound(shootingSound);
 
                 // trigger bullet casing effect
                 GameObject bulletCasing = Instantiate(bulletCasingPrefab, bulletCasingSpawn.position, bulletCasingSpawn.rotation);
@@ -88,14 +90,14 @@ public class BulletSpawnScript : MonoBehaviour
 
     void Update()
     {
-        this.checkReloading();
+        checkReloading();
         if (bulletCount == 0)
         {
-            this.reloading = true;
-            this.Reload();
+            reloading = true;
+            Reload();
         } else
         {
-            this.Shoot();
+            Shoot();
         }
     }
 }
