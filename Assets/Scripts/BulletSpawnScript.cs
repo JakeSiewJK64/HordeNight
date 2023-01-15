@@ -15,6 +15,7 @@ public class BulletSpawnScript : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
+            GetComponent<AudioSource>().Play();
             Destroy(bullet, bulletLifetime);
         }
     }

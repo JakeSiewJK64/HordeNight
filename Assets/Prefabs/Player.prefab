@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 7555644347600612612}
   - component: {fileID: 7555644347600612615}
   - component: {fileID: 7555644347600612614}
-  - component: {fileID: 7555644347600612633}
-  - component: {fileID: 7555644347600612632}
   - component: {fileID: 2227025961021804718}
   m_Layer: 0
   m_Name: Player
@@ -86,37 +84,6 @@ MonoBehaviour:
   spawnRadius: 5
   spawnInterval: 60
   minDistanceFromPlayer: 5
---- !u!114 &7555644347600612633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555644347600612634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e127a5e7be72af143a16d785a2633125, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8074845926922266155, guid: 42f74aa62ed9ea145b5e120f5648da56, type: 3}
-  bulletSpawn: {fileID: 0}
-  bulletSpeed: 100
-  bulletLifetime: 2
---- !u!114 &7555644347600612632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555644347600612634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff287c3a3f539742b700e7de50a73f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8098687726029102934, guid: 03176d6a79a576e458391267b227dd2e, type: 3}
-  bulletSpawn: {fileID: 0}
-  bulletLifetime: 2
 --- !u!54 &2227025961021804718
 Rigidbody:
   m_ObjectHideFlags: 0
