@@ -16,10 +16,13 @@ public class ZombieSpawnScript : MonoBehaviour
 
     public bool spawning = true;
 
+    public int bloodmoon;
+
     private void Start()
     {
         maxZombies = 0;
         round = 0;
+        bloodmoon = 7;
         ChangeRound();    
     }
 
@@ -28,6 +31,7 @@ public class ZombieSpawnScript : MonoBehaviour
         // Spawn the game object
         Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
         spawnPosition.y = 1;
+        prefabToSpawn.gameObject.GetComponent<ZombieScript>().health = 100 + (100 * (round / bloodmoon));
         Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
     }
 

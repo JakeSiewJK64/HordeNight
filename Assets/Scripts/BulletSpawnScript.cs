@@ -36,9 +36,9 @@ public class BulletSpawnScript : MonoBehaviour
             new WeaponClass(WeaponType.Sidearm, 3, 8, "glock", .2f, 2f, "glock.mp3", "glock_reload.mp3"));
         
         globalWeaponList.Add(
-            new WeaponClass(WeaponType.AssaultRifle, 5, 30, "M4", .1f, 2f, "glock.mp3", "glock_reload.mp3"));
+            new WeaponClass(WeaponType.AssaultRifle, 5, 30, "M4", .1f, 2f, "rifle_shoot.mp3", "glock_reload.mp3"));
         
-        currentWeapon = globalWeaponList[1];
+        currentWeapon = globalWeaponList[0];
         
         bulletCount = currentWeapon.magazineSize;
 
@@ -98,7 +98,7 @@ public class BulletSpawnScript : MonoBehaviour
     {
         checkReloading();
 
-        if (Input.GetKeyDown(KeyCode.R) && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && bulletCount != currentWeapon.magazineSize)
         {
             Reload();
         }
