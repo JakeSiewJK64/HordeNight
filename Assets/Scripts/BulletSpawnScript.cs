@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
-    [SerializeField]
-    private float bulletCount;
+    public float bulletCount;
+    public GameObject player;
 
-    public string soundFolder = "Assets/Raw";
+    public string soundFolder = "Assets/Raw/";
 
     // for bullet casing effect
     public GameObject bulletCasingPrefab;
@@ -21,7 +22,6 @@ public class BulletSpawnScript : MonoBehaviour
     public float bulletLifetime = 2f;
     public float lastClickTime;
 
-    public List<WeaponClass> globalWeaponList = new List<WeaponClass>();
     public WeaponClass currentWeapon;
     private AudioSource audioSource;
 
@@ -32,20 +32,15 @@ public class BulletSpawnScript : MonoBehaviour
 
     void Start()
     {
-        globalWeaponList.Add(
-            new WeaponClass(WeaponType.Sidearm, 3, 8, "glock", .2f, 2f, "glock.mp3", "glock_reload.mp3"));
-        
-        globalWeaponList.Add(
-            new WeaponClass(WeaponType.AssaultRifle, 5, 30, "M4", .1f, 2f, "rifle_shoot.mp3", "glock_reload.mp3"));
-        
-        currentWeapon = globalWeaponList[0];
+
+        currentWeapon = (WeaponClass)player.GetComponent<PlayerInventoryScript>().inventory["Weapon1"];
         
         bulletCount = currentWeapon.magazineSize;
 
         // initialize audio
         audioSource = GetComponent<AudioSource>();
-        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.reloadingSoundPath));
-        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.shootingSoundPath));
+        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.reloadingSoundPath));
+        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.shootingSoundPath));
     }
 
     private void playWeaponSound(AudioClip clip)

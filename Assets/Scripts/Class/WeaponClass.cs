@@ -1,30 +1,31 @@
-public class WeaponClass
+public class WeaponClass : Item
 {
     public WeaponType weaponType;
     public int damage;
     public int magazineSize;
-    public string name;
     public float fireRate;
     public float reloadTime;
     public string shootingSoundPath;
     public string reloadingSoundPath;
+
     public WeaponClass(
+        string name, 
+        string description, 
+        ItemType itemType, 
         WeaponType weaponType, 
         int damage, 
         int magazineSize, 
-        string name, 
         float fireRate, 
-        float reloadTime,
-        string shootingSoundPath,
-        string reloadingSountPath)
+        float reloadTime, 
+        string shootingSoundPath, 
+        string reloadingSoundPath) : base(name, description, itemType)
     {
         this.weaponType = weaponType;
         this.damage = damage;
         this.magazineSize = magazineSize;
-        this.name = name;
         this.fireRate = fireRate;
         this.reloadTime = reloadTime;
         this.shootingSoundPath = shootingSoundPath;
-        this.reloadingSoundPath = reloadingSountPath;
+        this.reloadingSoundPath = reloadingSoundPath;
     }
 }

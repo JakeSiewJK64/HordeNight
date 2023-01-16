@@ -588,7 +588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7555644347600612614, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: spawnRadius
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7555644347600612614, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: spawnInterval
@@ -597,6 +597,10 @@ PrefabInstance:
     - target: {fileID: 7555644347600612614, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: remainingZombies
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555644347600612614, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: minDistanceFromPlayer
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7555644347600612634, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_Name
