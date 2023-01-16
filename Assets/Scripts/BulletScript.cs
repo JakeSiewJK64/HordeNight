@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float damage = 0;
+    public float damage;
     public GameObject player;
     public ZombieScript zombie;
 
@@ -18,7 +18,6 @@ public class BulletScript : MonoBehaviour
 
     private void HandleEnvironment(Collision obj)
     {
-        Debug.Log("hit environment!");
         Destroy(gameObject);
     }
 

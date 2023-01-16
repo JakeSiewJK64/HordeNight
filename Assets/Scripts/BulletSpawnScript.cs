@@ -33,8 +33,13 @@ public class BulletSpawnScript : MonoBehaviour
     void Start()
     {
         globalWeaponList.Add(
-            new WeaponClass(WeaponType.Sidearm, 50, 8, "glock", .2f, 2f, "glock.mp3", "glock_reload.mp3"));
-        currentWeapon = globalWeaponList[0];
+            new WeaponClass(WeaponType.Sidearm, 3, 8, "glock", .2f, 2f, "glock.mp3", "glock_reload.mp3"));
+        
+        globalWeaponList.Add(
+            new WeaponClass(WeaponType.AssaultRifle, 5, 30, "M4", .1f, 2f, "glock.mp3", "glock_reload.mp3"));
+        
+        currentWeapon = globalWeaponList[1];
+        
         bulletCount = currentWeapon.magazineSize;
 
         // initialize audio
@@ -58,20 +63,21 @@ public class BulletSpawnScript : MonoBehaviour
 
     void Reload()
     {
+        reloading = true;
         bulletCount = currentWeapon.magazineSize;
         playWeaponSound(reloadSound);        
     }
 
     private void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && !reloading)
+        if (Input.GetMouseButton(0) && !reloading)
         {
             if (Time.time - lastClickTime > currentWeapon.fireRate)
             {
                 bulletCount -= 1;
                 lastClickTime = Time.time;
 
-                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage;
+                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float) currentWeapon.weaponType;
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
@@ -91,9 +97,14 @@ public class BulletSpawnScript : MonoBehaviour
     void Update()
     {
         checkReloading();
+
+        if (Input.GetKeyDown(KeyCode.R) && !reloading)
+        {
+            Reload();
+        }
+
         if (bulletCount == 0)
         {
-            reloading = true;
             Reload();
         } else
         {
