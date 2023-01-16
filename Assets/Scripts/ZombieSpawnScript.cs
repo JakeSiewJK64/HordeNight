@@ -1,44 +1,60 @@
+using TMPro;
 using UnityEngine;
 
 public class ZombieSpawnScript : MonoBehaviour
 {
     public GameObject prefabToSpawn;
-    public float spawnRadius = 5f;
-    public float spawnInterval = 60f;
-    public float minDistanceFromPlayer = 5f;
+    public float spawnRadius = 20f;
+    public float minDistanceFromPlayer = 20f;
 
-    private GameObject player;
-    private float timeUntilNextSpawn;
+    public int round = 0;
+    public int maxZombies = 0;
+    public int remainingZombies;
+
+    public TextMeshProUGUI zombieCounter;
+    public TextMeshProUGUI roundCounter;
+
+    public bool spawning = true;
 
     private void Start()
     {
-        // Initialize the time until the next spawn
-        timeUntilNextSpawn = spawnInterval;
-        player = gameObject;
+        maxZombies = 0;
+        round = 0;
+        ChangeRound();    
+    }
+
+    private void SpawnZombies()
+    {
+        // Spawn the game object
+        Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
+        spawnPosition.y = 1;
+        Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+    }
+
+    private void ChangeRound()
+    {
+        round++;
+        maxZombies += round * 2;
+        spawning = true;
     }
 
     private void Update()
     {
-        // Decrement the time until the next spawn
-        timeUntilNextSpawn -= Time.deltaTime;
+        remainingZombies = GameObject.FindGameObjectsWithTag("Zombie").Length;
 
-        // Check if it's time to spawn
-        if (timeUntilNextSpawn <= 0)
+        zombieCounter.text = "Remaining Zombies: " + remainingZombies;
+        roundCounter.text = "Round: " + round;
+
+        if((remainingZombies < maxZombies + 1) && spawning)
         {
-            // Spawn the game object
-            Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
-            spawnPosition.y = 1;
-            
-            float distanceFromPlayer = Vector3.Distance(spawnPosition, player.transform.position);
-            
-            if(distanceFromPlayer < minDistanceFromPlayer)
-            {
-                timeUntilNextSpawn = spawnInterval;
+            if(remainingZombies >= maxZombies) {
+                spawning = false;
                 return;
             }
-
-            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-            timeUntilNextSpawn = spawnInterval;
+            SpawnZombies();
+        } else if (remainingZombies == 0)
+        {
+            ChangeRound();
         }
     }
 }
