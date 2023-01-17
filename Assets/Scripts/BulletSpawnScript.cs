@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
-    public float bulletCount;
-
     public string soundFolder = "Assets/Raw/";
 
     // for bullet casing effect
@@ -32,14 +30,12 @@ public class BulletSpawnScript : MonoBehaviour
     public void ChangeWeapon(WeaponClass newWeapon)
     {
         currentWeapon = newWeapon;
-        bulletCount = newWeapon.magazineSize;
         reloading = false;
     }  
 
     private void Start()
     {
         currentWeapon = gameObject.GetComponent<PlayerInventoryScript>().GetCurrentWeapon();
-        bulletCount = currentWeapon.magazineSize;
 
         // initialize audio
         audioSource = GetComponent<AudioSource>();
@@ -54,7 +50,7 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void checkReloading()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !reloading && bulletCount != currentWeapon.magazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && currentWeapon.currentBullets != currentWeapon.magazineSize)
         {
             Reload();
         }
@@ -68,7 +64,7 @@ public class BulletSpawnScript : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        bulletCount = currentWeapon.magazineSize;
+        currentWeapon.Reload();
         playWeaponSound(reloadSound);        
     }
 
@@ -78,7 +74,7 @@ public class BulletSpawnScript : MonoBehaviour
         {
             if (Time.time - lastClickTime > currentWeapon.fireRate)
             {
-                bulletCount--;
+                currentWeapon.currentBullets--;
                 lastClickTime = Time.time;
                 bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float) currentWeapon.weaponType;
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
@@ -100,7 +96,7 @@ public class BulletSpawnScript : MonoBehaviour
     private void Update()
     {
         checkReloading();        
-        if (bulletCount == 0)
+        if (currentWeapon.currentBullets == 0)
         {
             Reload();
         } else

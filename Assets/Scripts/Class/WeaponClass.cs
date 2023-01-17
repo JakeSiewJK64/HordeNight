@@ -3,6 +3,7 @@ public class WeaponClass : Item
     public WeaponType weaponType;
     public int damage;
     public int magazineSize;
+    public float currentBullets;
     public float fireRate;
     public float reloadTime;
     public string shootingSoundPath;
@@ -15,6 +16,7 @@ public class WeaponClass : Item
         WeaponType weaponType, 
         int damage, 
         int magazineSize, 
+        float currentBullets,
         float fireRate, 
         float reloadTime, 
         string shootingSoundPath, 
@@ -23,9 +25,15 @@ public class WeaponClass : Item
         this.weaponType = weaponType;
         this.damage = damage;
         this.magazineSize = magazineSize;
+        this.currentBullets = currentBullets;
         this.fireRate = fireRate;
         this.reloadTime = reloadTime;
         this.shootingSoundPath = shootingSoundPath;
         this.reloadingSoundPath = reloadingSoundPath;
+    }
+
+    public void Reload()
+    {
+        currentBullets = magazineSize;
     }
 }
