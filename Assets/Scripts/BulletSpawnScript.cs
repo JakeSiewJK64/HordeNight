@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,10 +29,16 @@ public class BulletSpawnScript : MonoBehaviour
 
     public Inventory inventory;
 
-    void Start()
+    public void ChangeWeapon(WeaponClass newWeapon)
     {
-        inventory = gameObject.GetComponent<PlayerInventoryScript>().GetInventory();
-        currentWeapon = (WeaponClass) inventory.GetPrimaryWeapon();
+        currentWeapon = newWeapon;
+        bulletCount = newWeapon.magazineSize;
+        reloading = false;
+    }  
+
+    private void Start()
+    {
+        currentWeapon = gameObject.GetComponent<PlayerInventoryScript>().GetCurrentWeapon();
         bulletCount = currentWeapon.magazineSize;
 
         // initialize audio
@@ -50,13 +54,18 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void checkReloading()
     {
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && bulletCount != currentWeapon.magazineSize)
+        {
+            Reload();
+        }
+
         if (Time.time - lastClickTime > currentWeapon.reloadTime)
         {
             reloading = false;
         }
     }
 
-    void Reload()
+    private void Reload()
     {
         reloading = true;
         bulletCount = currentWeapon.magazineSize;
@@ -69,9 +78,8 @@ public class BulletSpawnScript : MonoBehaviour
         {
             if (Time.time - lastClickTime > currentWeapon.fireRate)
             {
-                bulletCount -= 1;
+                bulletCount--;
                 lastClickTime = Time.time;
-
                 bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float) currentWeapon.weaponType;
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -89,15 +97,9 @@ public class BulletSpawnScript : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        checkReloading();
-
-        if (Input.GetKeyDown(KeyCode.R) && !reloading && bulletCount != currentWeapon.magazineSize)
-        {
-            Reload();
-        }
-
+        checkReloading();        
         if (bulletCount == 0)
         {
             Reload();
