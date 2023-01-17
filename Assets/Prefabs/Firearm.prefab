@@ -260,7 +260,6 @@ GameObject:
   - component: {fileID: 8415542865014453983}
   - component: {fileID: 4077026934008023693}
   - component: {fileID: 1822956900503656668}
-  - component: {fileID: 4704669670279889014}
   - component: {fileID: 5663437008010600059}
   m_Layer: 0
   m_Name: Firearm
@@ -337,27 +336,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4704669670279889014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5679155006291339723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e127a5e7be72af143a16d785a2633125, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCount: 0
-  soundFolder: Assets/Raw
-  bulletCasingPrefab: {fileID: 8098687726029102934, guid: 03176d6a79a576e458391267b227dd2e, type: 3}
-  bulletCasingSpawn: {fileID: 4261499839070514179}
-  bulletPrefab: {fileID: 8074845926922266155, guid: 42f74aa62ed9ea145b5e120f5648da56, type: 3}
-  bulletSpawn: {fileID: 1046048469337833944}
-  bulletSpeed: 100
-  bulletLifetime: 2
-  lastClickTime: 0
 --- !u!82 &5663437008010600059
 AudioSource:
   m_ObjectHideFlags: 0

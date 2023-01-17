@@ -3,22 +3,27 @@ using UnityEngine;
 
 public class PlayerInventoryScript : MonoBehaviour
 {
-    public List<WeaponClass> globalWeaponList = new List<WeaponClass>();
-    public Dictionary<string, Item> inventory = new Dictionary<string, Item>();
+    private List<WeaponClass> globalWeaponList;
+    private Inventory inventory;
 
-    void InitializeWeapon()
+    private void Awake()
     {
-        globalWeaponList.Add(
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3"));
+        globalWeaponList = new List<WeaponClass>
+        {
+            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3"),
 
-        globalWeaponList.Add(
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, .1f, 2f, "rifle_shoot.mp3", "glock_reload.mp3"));
+            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, .1f, 2f, "rifle_shoot.mp3", "glock_reload.mp3")
+        };
+        
+        inventory = new Inventory(
+            new Dictionary<string, Item> {
+                { "Primary", globalWeaponList[1] },
+                { "Secondary", globalWeaponList[0] }
+            }
+        );
     }
 
-    void Start()
-    {
-        InitializeWeapon();
-        inventory.Add("Weapon1", globalWeaponList[0]);
-        inventory.Add("Weapon2", globalWeaponList[1]);
+    public Inventory GetInventory() { 
+        return inventory;
     }
 }

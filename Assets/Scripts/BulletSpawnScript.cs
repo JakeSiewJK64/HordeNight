@@ -7,7 +7,6 @@ using UnityEngine;
 public class BulletSpawnScript : MonoBehaviour
 {
     public float bulletCount;
-    public GameObject player;
 
     public string soundFolder = "Assets/Raw/";
 
@@ -30,17 +29,18 @@ public class BulletSpawnScript : MonoBehaviour
 
     public bool reloading = false;
 
+    public Inventory inventory;
+
     void Start()
     {
-
-        currentWeapon = (WeaponClass)player.GetComponent<PlayerInventoryScript>().inventory["Weapon1"];
-        
+        inventory = gameObject.GetComponent<PlayerInventoryScript>().GetInventory();
+        currentWeapon = (WeaponClass) inventory.GetPrimaryWeapon();
         bulletCount = currentWeapon.magazineSize;
 
         // initialize audio
         audioSource = GetComponent<AudioSource>();
-        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.reloadingSoundPath));
-        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.shootingSoundPath));
+        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.reloadingSoundPath));
+        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.shootingSoundPath));
     }
 
     private void playWeaponSound(AudioClip clip)
