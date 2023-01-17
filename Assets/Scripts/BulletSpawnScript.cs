@@ -1,4 +1,5 @@
 using System.IO;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class BulletSpawnScript : MonoBehaviour
     // for bullet casing effect
     public GameObject bulletCasingPrefab;
     public Transform bulletCasingSpawn;
+
+    public TextMeshProUGUI bulletCounterIndicator;
+    public TextMeshProUGUI weaponTypeIndicator;
 
     // actual weapon effect
     public GameObject bulletPrefab;
@@ -31,11 +35,13 @@ public class BulletSpawnScript : MonoBehaviour
     {
         currentWeapon = newWeapon;
         reloading = false;
+        weaponTypeIndicator.text = currentWeapon.name;
     }  
 
     private void Start()
     {
         currentWeapon = gameObject.GetComponent<PlayerInventoryScript>().GetCurrentWeapon();
+        weaponTypeIndicator.text = currentWeapon.name;
 
         // initialize audio
         audioSource = GetComponent<AudioSource>();
@@ -68,6 +74,11 @@ public class BulletSpawnScript : MonoBehaviour
         playWeaponSound(reloadSound);        
     }
 
+    private void UpdateBulletCount()
+    {
+        bulletCounterIndicator.text = currentWeapon.currentBullets + " / " + currentWeapon.magazineSize;
+    }
+
     private void Shoot()
     {
         if (Input.GetMouseButton(0) && !reloading)
@@ -95,6 +106,7 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void Update()
     {
+        UpdateBulletCount();
         checkReloading();        
         if (currentWeapon.currentBullets == 0)
         {
