@@ -1,24 +1,29 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class ZombieScript : MonoBehaviour
 {
-    public float followRadius = 10f;
-    public float health = 100f;
-    public TextMeshPro textMesh;
+    public Zombie zombie = new Zombie(100, .125f);
 
-    void HealthCheck()
+    [SerializeField]
+    private float followRadius = 10f;
+
+    [SerializeField]
+    private TextMeshPro textMesh;
+
+    private void HealthCheck()
     {
-        if(health <= 0)
+        if(zombie.health <= 0)
         {
             Destroy(gameObject);
         }
     }
 
-    void Update()
+    private void Update()
     {
         HealthCheck();
-        textMesh.text = health.ToString();
+        textMesh.text = zombie.health.ToString();
         float movementSpeed = Random.Range(1, 5);
         GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
            
@@ -37,5 +42,32 @@ public class ZombieScript : MonoBehaviour
                 }
             }
         }
+    }
+    private void TakePlayerDamage(Collision collision)
+    {
+        StartCoroutine(DelayDamage(collision));
+        if(collision.gameObject.tag == "Player")
+        {
+            if(collision.gameObject.GetComponent<PlayerHealthScript>().player.health > 0)
+            {
+                collision.gameObject.GetComponent<PlayerHealthScript>().player.TakeDamage(zombie.damage);
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        TakePlayerDamage(collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        TakePlayerDamage(collision);
+    }
+
+    public IEnumerator DelayDamage(Collision collision)
+    {
+        yield return new WaitForSeconds(2f);
+        TakePlayerDamage(collision);
     }
 }

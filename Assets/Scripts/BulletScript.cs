@@ -5,7 +5,7 @@ public class BulletScript : MonoBehaviour
 {
     public float damage;
     public GameObject player;
-    public ZombieScript zombie;
+    public ZombieScript zombieScript;
 
     private Dictionary<string, System.Action<Collision>> actions 
         = new Dictionary<string, System.Action<Collision>>();
@@ -23,10 +23,10 @@ public class BulletScript : MonoBehaviour
 
     private void HandleZombies(Collision obj)
     {
-        zombie =  obj.gameObject.GetComponent<ZombieScript>();
+        zombieScript =  obj.gameObject.GetComponent<ZombieScript>();
         // destroy the bullet on impact
         Destroy(gameObject);
-        zombie.health -= damage;
+        zombieScript.zombie.health -= damage;
     }
 
     void OnCollisionEnter(Collision collision)
