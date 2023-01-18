@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
-    public string soundFolder = "Assets/Raw/";
+    public string soundFolder = "Assets/Raw/Sound/";
 
     // for bullet casing effect
     public GameObject bulletCasingPrefab;
@@ -36,6 +36,7 @@ public class BulletSpawnScript : MonoBehaviour
         currentWeapon = newWeapon;
         reloading = false;
         weaponTypeIndicator.text = currentWeapon.name;
+        UpdateShootingSound();
     }  
 
     private void Start()
@@ -45,8 +46,13 @@ public class BulletSpawnScript : MonoBehaviour
 
         // initialize audio
         audioSource = GetComponent<AudioSource>();
-        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.reloadingSoundPath));
-        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine("Assets/Raw/", currentWeapon.shootingSoundPath));
+        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.reloadingSoundPath));
+        UpdateShootingSound();
+    }
+
+    private void UpdateShootingSound()
+    {
+        shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.shootingSoundPath));
     }
 
     private void playWeaponSound(AudioClip clip)
