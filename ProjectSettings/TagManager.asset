@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - BulletCasing
   - Zombie
+  - Spawnpad
   layers:
   - Default
   - TransparentFX

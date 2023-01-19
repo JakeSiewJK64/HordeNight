@@ -47,7 +47,7 @@ public class PlayerInventoryScript : MonoBehaviour
         globalWeaponList = new List<WeaponClass>
         {
             new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "m4.png"),
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, 30, .1f, 2f, "rifle_shoot.mp3", "glock_reload.mp3", "m4.png")
+            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png")
         };
     }
 
