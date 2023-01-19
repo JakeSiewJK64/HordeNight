@@ -50,7 +50,6 @@ public class ZombieSpawnScript : MonoBehaviour
                 spawnPads.Add(col.gameObject);
             }
         }
-        Debug.Log(spawnPads.Count);
     }
 
     private void SpawnZombies()
