@@ -30,7 +30,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         if(shiftPressed)
         {
-            controller.Move(move * Time.deltaTime * (playerSpeed * 2));
+            controller.Move(move * Time.deltaTime * (playerSpeed * 5));
         } else
         {
             controller.Move(move * Time.deltaTime * (playerSpeed));
