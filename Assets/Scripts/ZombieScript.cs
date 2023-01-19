@@ -43,10 +43,11 @@ public class ZombieScript : MonoBehaviour
             }
         }
     }
+
     private void TakePlayerDamage(Collision collision)
     {
         StartCoroutine(DelayDamage(collision));
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && gameObject)
         {
             if(collision.gameObject.GetComponent<PlayerHealthScript>().player.health > 0)
             {

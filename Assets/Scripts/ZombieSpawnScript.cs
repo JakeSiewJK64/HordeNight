@@ -8,6 +8,7 @@ public class ZombieSpawnScript : MonoBehaviour
     public float minDistanceFromPlayer = 20f;
 
     public int round = 0;
+    public int spawnYAxis = 4;
     public int maxZombies = 0;
     public int remainingZombies;
 
@@ -30,7 +31,7 @@ public class ZombieSpawnScript : MonoBehaviour
     {
         // Spawn the game object
         Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
-        spawnPosition.y = 1;
+        spawnPosition.y = spawnYAxis;
         prefabToSpawn.gameObject.GetComponent<ZombieScript>().zombie.health = 100 + (100 * (round / bloodmoon));
         Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
     }
