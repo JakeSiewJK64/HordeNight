@@ -57,7 +57,7 @@ public class ZombieSpawnScript : MonoBehaviour
         Checkspawnpad();
         // Spawn the game object
         GameObject spawnPad = spawnPads[Random.Range(0, spawnPads.Count - 1)];
-        spawnPos = new Vector3(spawnPad.transform.position.x, spawnPad.transform.position.y - 3, spawnPad.transform.position.z);
+        spawnPos = new Vector3(spawnPad.transform.position.x, spawnPad.transform.position.y + 3, spawnPad.transform.position.z);
         prefabToSpawn.gameObject.GetComponent<ZombieScript>().zombie.health = 100 + (100 * (round / bloodmoon));
         Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
     }
