@@ -17,7 +17,6 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (player.health <= 0)
         {
-            Debug.Log("died");
             ProcessDeath();
         }
         healthbar.transform.localScale = new Vector3((player.health / 100) * 2, .125f, .125f);

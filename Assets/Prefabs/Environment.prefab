@@ -11383,6 +11383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ATM3
       objectReference: {fileID: 0}
+    - target: {fileID: 1884871784188532655, guid: f3f0b4f2ff1395e49b5030a84572002e, type: 3}
+      propertyPath: m_TagString
+      value: Buystation
+      objectReference: {fileID: 0}
     - target: {fileID: 3202957903826789820, guid: f3f0b4f2ff1395e49b5030a84572002e, type: 3}
       propertyPath: m_RootOrder
       value: 3

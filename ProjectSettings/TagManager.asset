@@ -9,6 +9,7 @@ TagManager:
   - BulletCasing
   - Zombie
   - Spawnpad
+  - Buystation
   layers:
   - Default
   - TransparentFX
