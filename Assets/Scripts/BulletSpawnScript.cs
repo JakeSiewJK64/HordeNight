@@ -31,6 +31,8 @@ public class BulletSpawnScript : MonoBehaviour
 
     public Inventory inventory;
 
+    public bool interactingBuyStation = false;
+
     public void ChangeWeapon(WeaponClass newWeapon)
     {
         currentWeapon = newWeapon;
@@ -113,13 +115,17 @@ public class BulletSpawnScript : MonoBehaviour
     private void Update()
     {
         UpdateBulletCount();
-        checkReloading();        
-        if (currentWeapon.currentBullets == 0)
+        checkReloading();      
+        if(!interactingBuyStation)
         {
-            Reload();
-        } else
-        {
-            Shoot();
+            if (currentWeapon.currentBullets == 0)
+            {
+                Reload();
+            }
+            else
+            {
+                Shoot();
+            }
         }
     }
 }

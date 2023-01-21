@@ -19,11 +19,26 @@ public class BuyStationScript : MonoBehaviour
 
     private string imagePath = "Assets/Raw/Img/";
 
+    private bool interacting = false;
+
     private void Start()
     {
-        buyStation.enabled = false;
+        buyStation.gameObject.SetActive(false);
         InitializeWeaponList();
         populateBuystation();
+    }
+
+    private void Update()
+    {
+        if(interacting && Input.GetKeyDown(KeyCode.F))
+        {
+            // todo: exit buy station
+            buyStation.gameObject.SetActive(false);
+            mainScreen.gameObject.SetActive(true);
+            ToggleCursor();
+            interacting = false;
+            GetComponent<BulletSpawnScript>().interactingBuyStation = false;
+        }
     }
 
     private void populateBuystation()
@@ -40,23 +55,14 @@ public class BuyStationScript : MonoBehaviour
         }
     }
 
-    private void CheckBuyStation(Collision col)
+    private void CheckBuyStation()
     {
-        if (col.gameObject.tag == "Buystation")
-        {
-            // todo: enter buy station
-            buyStation.enabled = true;
-            mainScreen.enabled = false;
-            ToggleCursor();
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                // todo: exit buy station
-                buyStation.enabled = false;
-                mainScreen.enabled = true;
-                ToggleCursor();
-            }
-        } 
+        // todo: enter buy station
+        buyStation.gameObject.SetActive(true);
+        mainScreen.gameObject.SetActive(false);
+        ToggleCursor();            
+        interacting = true;
+        GetComponent<BulletSpawnScript>().interactingBuyStation = true;
     }
 
     private void InitializeWeaponList()
@@ -70,27 +76,21 @@ public class BuyStationScript : MonoBehaviour
             new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
             new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
             new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
             new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png")
         };
     }
 
     private void ToggleCursor()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        CheckBuyStation(collision);
+        Cursor.visible = !Cursor.visible;
+        Cursor.lockState = Cursor.lockState == CursorLockMode.Confined ? CursorLockMode.Locked : CursorLockMode.Confined;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        CheckBuyStation(collision);
+        if (collision.gameObject.tag == "Buystation")
+        {
+            CheckBuyStation();
+        }
     }
 }
