@@ -1,9 +1,13 @@
+using System.IO;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuyItemViewholderScript : MonoBehaviour
 {
+    public Item itemObject;
+    
     [SerializeField]
     private Image image;
 
@@ -12,6 +16,22 @@ public class BuyItemViewholderScript : MonoBehaviour
     
     [SerializeField]
     private TextMeshProUGUI itemType;
+
+    [SerializeField]
+    private GameObject buyStation;
+
+    private string imagePath = "Assets/Raw/Img/";
+
+    public void SetItem(Item item)
+    {
+        itemObject = item;
+        ChangeItemName(item.name);
+        ChangeImage(AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass) item).weaponIconPath)));
+        if(item.itemType == ItemType.Weapon)
+        {
+            ChangeItemType(((WeaponClass) item).weaponType.ToString());
+        }
+    }
 
     public Image GetImage()
     {
@@ -38,4 +58,8 @@ public class BuyItemViewholderScript : MonoBehaviour
         image.sprite = sprite;
     }
 
+    private void OnMouseClick()
+    {
+        GetComponentInParent<BuyStationScript>().UpdateDescriptionPanel(itemObject);
+    }
 }

@@ -28,22 +28,25 @@ public class PlayerMovementScript : MonoBehaviour
         bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        if(shiftPressed)
+        if (!GetComponent<BuyStationScript>().interacting)
         {
-            controller.Move(move * Time.deltaTime * (playerSpeed * 5));
-        } else
-        {
-            controller.Move(move * Time.deltaTime * (playerSpeed));
-        }
+            if (shiftPressed)
+            {
+                controller.Move(move * Time.deltaTime * (playerSpeed * 5));
+            }
+            else
+            {
+                controller.Move(move * Time.deltaTime * (playerSpeed));
+            }
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+            // Changes the height position of the player..
+            if (Input.GetButtonDown("Jump") && groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);       
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
     }
-
 }

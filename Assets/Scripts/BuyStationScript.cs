@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +15,7 @@ public class BuyStationScript : MonoBehaviour
 
     private List<WeaponClass> globalWeaponList;
 
-    private string imagePath = "Assets/Raw/Img/";
-
-    private bool interacting = false;
+    public bool interacting = false;
 
     private void Start()
     {
@@ -37,7 +33,6 @@ public class BuyStationScript : MonoBehaviour
             mainScreen.gameObject.SetActive(true);
             ToggleCursor();
             interacting = false;
-            GetComponent<BulletSpawnScript>().interactingBuyStation = false;
         }
     }
 
@@ -48,9 +43,7 @@ public class BuyStationScript : MonoBehaviour
             GameObject newItem = Instantiate(viewholder, scrollArea.content);
             if(newItem.TryGetComponent(out BuyItemViewholderScript viewholderItem))
             {
-                viewholderItem.ChangeImage(AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, item.weaponIconPath)));
-                viewholderItem.ChangeItemName(item.name);
-                viewholderItem.ChangeItemType(item.weaponType.ToString());
+                viewholderItem.SetItem(item);
             }
         }
     }
@@ -62,7 +55,6 @@ public class BuyStationScript : MonoBehaviour
         mainScreen.gameObject.SetActive(false);
         ToggleCursor();            
         interacting = true;
-        GetComponent<BulletSpawnScript>().interactingBuyStation = true;
     }
 
     private void InitializeWeaponList()
@@ -88,9 +80,13 @@ public class BuyStationScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Buystation")
-        {
+        if (collision.gameObject.tag == "Buystation") { 
             CheckBuyStation();
         }
+    }
+
+    public void UpdateDescriptionPanel(Item item)
+    {
+        GetComponent<BuyItemDescriptionViewholderScript>().UpdateDescription(item);
     }
 }
