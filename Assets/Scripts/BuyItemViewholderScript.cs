@@ -17,9 +17,6 @@ public class BuyItemViewholderScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemType;
 
-    [SerializeField]
-    private GameObject buyStation;
-
     private string imagePath = "Assets/Raw/Img/";
 
     public void SetItem(Item item)
@@ -58,7 +55,7 @@ public class BuyItemViewholderScript : MonoBehaviour
         image.sprite = sprite;
     }
 
-    private void OnMouseClick()
+    public void OnMouseClick()
     {
         GetComponentInParent<BuyStationScript>().UpdateDescriptionPanel(itemObject);
     }

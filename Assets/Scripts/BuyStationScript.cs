@@ -8,12 +8,14 @@ public class BuyStationScript : MonoBehaviour
     private Canvas mainScreen, buyStation;
 
     [SerializeField]
-    private GameObject viewholder;
+    private GameObject viewholder, descriptionPanel, buyButton;
 
     [SerializeField]
     private ScrollRect scrollArea;
 
     private List<WeaponClass> globalWeaponList;
+
+    private Item selectedItem;
 
     public bool interacting = false;
 
@@ -22,17 +24,31 @@ public class BuyStationScript : MonoBehaviour
         buyStation.gameObject.SetActive(false);
         InitializeWeaponList();
         populateBuystation();
+        CheckSelectedItem();
     }
 
     private void Update()
     {
-        if(interacting && Input.GetKeyDown(KeyCode.F))
+        if (interacting && Input.GetKeyDown(KeyCode.F))
         {
             // todo: exit buy station
             buyStation.gameObject.SetActive(false);
             mainScreen.gameObject.SetActive(true);
             ToggleCursor();
             interacting = false;
+        }
+    }
+
+    private void CheckSelectedItem()
+    {
+        if(selectedItem == null)
+        {
+            descriptionPanel.gameObject.SetActive(false);
+            buyButton.gameObject.SetActive(false);
+        } else
+        {
+            descriptionPanel.gameObject.SetActive(true);
+            buyButton.gameObject.SetActive(true);
         }
     }
 
@@ -88,5 +104,12 @@ public class BuyStationScript : MonoBehaviour
     public void UpdateDescriptionPanel(Item item)
     {
         GetComponent<BuyItemDescriptionViewholderScript>().UpdateDescription(item);
+        CheckSelectedItem();
+        selectedItem = item;
+    }
+
+    public void OnBuyButtonPressed()
+    {
+        Debug.Log(selectedItem);
     }
 }

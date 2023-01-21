@@ -23,8 +23,8 @@ public class BuyItemDescriptionViewholderScript : MonoBehaviour
         this.item = item;
         if (item.itemType == ItemType.Weapon)
         {            
-            damage.text = "Item: " + item.name;
-            reloadSpeed.text = "Reload Time: " + ((WeaponClass)item).reloadTime.ToString();
+            damage.text = "Damage: " + ((WeaponClass)item).damage;
+            reloadSpeed.text = "Reload Time: " + ((WeaponClass)item).reloadTime.ToString() + "s";
             magSize.text = "Magazine Size: " + ((WeaponClass)item).magazineSize.ToString();
         }
     }
