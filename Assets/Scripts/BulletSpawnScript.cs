@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
-    public string soundFolder = "Assets/Raw/Sound/";
+    public string soundFolder = "Assets/Resources/Sound/";
 
     // for bullet casing effect
     public GameObject bulletCasingPrefab;

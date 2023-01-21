@@ -13,9 +13,9 @@ public class BuyItemViewholderScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemType;
 
-    public string GetImageSpriteName()
+    public Image GetImage()
     {
-        return image.sprite.name;
+        return image;
     }
 
     public string GetItemName()
