@@ -1,6 +1,7 @@
 public class WeaponClass : Item
 {
     public WeaponType weaponType;
+    public WeaponHolding weaponHolding;
     public int damage;
     public int magazineSize;
     public float currentBullets;
@@ -15,6 +16,7 @@ public class WeaponClass : Item
         string description,
         ItemType itemType,
         WeaponType weaponType,
+        WeaponHolding weaponHolding,
         int damage,
         int magazineSize,
         float currentBullets,
@@ -25,6 +27,7 @@ public class WeaponClass : Item
         string weaponIconPath) : base(name, description, itemType)
     {
         this.weaponType = weaponType;
+        this.weaponHolding = weaponHolding;
         this.damage = damage;
         this.magazineSize = magazineSize;
         this.currentBullets = currentBullets;

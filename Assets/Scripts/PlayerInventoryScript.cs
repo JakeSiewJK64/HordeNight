@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInventoryScript : MonoBehaviour
 {
-    private List<WeaponClass> globalWeaponList;
     private Inventory inventory;
     private WeaponClass currentWeapon;
 
@@ -19,51 +19,48 @@ public class PlayerInventoryScript : MonoBehaviour
 
     private void Awake()
     {
-        InitializeWeaponList();
         InitializeInventory();
-        currentWeapon = (WeaponClass)inventory.GetPrimaryWeapon();
-        primaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.green;
+        currentWeapon = (WeaponClass)inventory.GetSecondaryWeapon();
+        secondaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.green;
         UpdateWeaponHotbarSprites();  
     }
 
-    private void UpdateWeaponHotbarSprites()
+    public void UpdateWeaponHotbarSprites()
     {
-       primaryWeaponHotBar.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Path.Combine(imagePath, ((WeaponClass) inventory.GetPrimaryWeapon()).weaponIconPath));
-       secondaryWeaponHotBar.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Path.Combine(imagePath, ((WeaponClass)inventory.GetSecondaryWeapon()).weaponIconPath));
+        if(inventory.GetPrimaryWeapon() != null)
+        {
+            primaryWeaponHotBar.GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass) inventory.GetPrimaryWeapon()).weaponIconPath));
+        } else if (inventory.GetSecondaryWeapon() != null)
+        {
+            secondaryWeaponHotBar.GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass)inventory.GetSecondaryWeapon()).weaponIconPath));
+        }
     }
 
     private void InitializeInventory()
     {
         inventory = new Inventory(
            new Dictionary<string, Item> {
-                { "Primary", globalWeaponList[1] },
-                { "Secondary", globalWeaponList[0] }
+                { 
+                   "Secondary", 
+                   new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png")
+                }
            }
        );
     }
 
-    private void InitializeWeaponList()
-    {
-        globalWeaponList = new List<WeaponClass>
-        {
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "m4.png"),
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png")
-        };
-    }
-
     private void CheckInput()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1)) 
+        if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.GetPrimaryWeapon() != null) 
         {
             gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetPrimaryWeapon());
-            primaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.green;
-            secondaryWeaponHotBar.GetComponent<Outline>().effectColor= Color.white;
+            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
+            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && inventory.GetSecondaryWeapon() != null)
         {
             gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetSecondaryWeapon());
-            primaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.white;
-            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.green;
+            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
+            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
         }
     }
 
@@ -75,5 +72,10 @@ public class PlayerInventoryScript : MonoBehaviour
     public WeaponClass GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public Inventory GetPlayerInventory()
+    {
+        return inventory;
     }
 }

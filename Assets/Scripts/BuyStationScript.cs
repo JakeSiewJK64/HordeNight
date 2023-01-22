@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +20,10 @@ public class BuyStationScript : MonoBehaviour
     private Item selectedItem;
 
     public bool interacting = false;
+
+    private string audioPath = "Assets/Raw/Sound/SoundEffects/menuSelect.mp3";
+
+    private AudioClip selectSound;
 
     private void Start()
     {
@@ -77,14 +83,7 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("glock", "description", ItemType.Weapon, WeaponType.Sidearm, 3, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png"),
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, 5, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png")
+            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, 15, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png"),
         };
     }
 
@@ -101,15 +100,38 @@ public class BuyStationScript : MonoBehaviour
         }
     }
 
+    private void PlaySelectSound()
+    {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(audioPath)));
+    }
+
     public void UpdateDescriptionPanel(Item item)
     {
-        GetComponent<BuyItemDescriptionViewholderScript>().UpdateDescription(item);
+        PlaySelectSound();
         CheckSelectedItem();
+        GetComponent<BuyItemDescriptionViewholderScript>().UpdateDescription(item);
         selectedItem = item;
+    }
+
+    private void BuyWeapon()
+    {
+        if (((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY)
+        {
+            gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetPrimaryWeapon((WeaponClass)selectedItem);
+        }
+        else if (((WeaponClass)selectedItem).weaponHolding == WeaponHolding.SECONDARY)
+        {
+            gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetSecondaryWeapon((WeaponClass)selectedItem);
+        }
+        gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
     }
 
     public void OnBuyButtonPressed()
     {
-        Debug.Log(selectedItem);
+        PlaySelectSound();
+        if(selectedItem.itemType == ItemType.Weapon)
+        {
+            BuyWeapon();
+        }
     }
 }

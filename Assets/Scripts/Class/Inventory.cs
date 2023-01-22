@@ -11,11 +11,36 @@ public class Inventory
 
     public Item GetPrimaryWeapon()
     {
-        return this.inventory["Primary"];
+        try
+        {
+            return inventory["Primary"];
+        } catch { return null; }
     }
 
     public Item GetSecondaryWeapon()
     {
-        return inventory["Secondary"];
+        try
+        {
+            return inventory["Secondary"];
+        }
+        catch { return null; }
+    }
+
+    public void SetPrimaryWeapon(WeaponClass item)
+    {
+        if (inventory.ContainsKey("Primary"))
+        {
+            inventory.Remove("Primary");
+        }
+        inventory.Add("Primary", item);
+    }
+
+    public void SetSecondaryWeapon(WeaponClass item)
+    {
+        if (inventory.ContainsKey("Secondary"))
+        {
+            inventory.Remove("Secondary");
+        }
+        inventory.Add("Secondary", item);
     }
 }

@@ -1,11 +1,12 @@
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class BulletSpawnScript : MonoBehaviour
 {
-    public string soundFolder = "Assets/Resources/Sound/";
+    private string soundFolder = "Assets/Raw/Sound/";
 
     // for bullet casing effect
     public GameObject bulletCasingPrefab;
