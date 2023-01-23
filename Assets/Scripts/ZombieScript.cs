@@ -25,7 +25,7 @@ public class ZombieScript : MonoBehaviour
     {
         HealthCheck();
         textMesh.text = zombie.health.ToString();
-        float movementSpeed = Random.Range(3, 8);
+        float movementSpeed = Random.Range(0.5f, 3);
         GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
            
         foreach (GameObject player in allPlayers)
@@ -40,6 +40,7 @@ public class ZombieScript : MonoBehaviour
                         transform.position,
                         targetPosition,
                         movementSpeed * Time.deltaTime);
+                    transform.LookAt(allPlayers[0].transform);
                 }
             }
         }
