@@ -122,6 +122,7 @@ public class BuyStationScript : MonoBehaviour
             gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetSecondaryWeapon((WeaponClass)selectedItem);
         }
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
+        gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);
     }
 
     public void OnBuyButtonPressed()

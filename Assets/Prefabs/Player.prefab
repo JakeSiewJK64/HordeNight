@@ -3708,12 +3708,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7555644347600612635}
     m_Modifications:
+    - target: {fileID: 1822956900503656668, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728134038032675406, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5679155006291339723, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
       propertyPath: m_Name
       value: Firearm
       objectReference: {fileID: 0}
     - target: {fileID: 5679155006291339723, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808179602640141968, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8415542865014453983, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
@@ -3759,6 +3771,10 @@ PrefabInstance:
     - target: {fileID: 8415542865014453983, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609516569622925804, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5370067bf5da42b49a0c2952c5287e14, type: 3}
