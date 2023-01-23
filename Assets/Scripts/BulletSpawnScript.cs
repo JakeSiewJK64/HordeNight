@@ -1,6 +1,5 @@
 using System.IO;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,7 +36,7 @@ public class BulletSpawnScript : MonoBehaviour
         currentWeapon = newWeapon;
         reloading = false;
         weaponTypeIndicator.text = currentWeapon.name;
-        UpdateShootingSound();
+        UpdateWeaponSound();
     }  
 
     private void Start()
@@ -48,12 +47,13 @@ public class BulletSpawnScript : MonoBehaviour
         // initialize audio
         audioSource = GetComponent<AudioSource>();
         reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.reloadingSoundPath));
-        UpdateShootingSound();
+        UpdateWeaponSound();
     }
 
-    private void UpdateShootingSound()
+    private void UpdateWeaponSound()
     {
         shootingSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.shootingSoundPath));
+        reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(soundFolder, currentWeapon.reloadingSoundPath));
     }
 
     private void playWeaponSound(AudioClip clip)

@@ -23,8 +23,6 @@ public class BuyStationScript : MonoBehaviour
 
     private string audioPath = "Assets/Raw/Sound/SoundEffects/menuSelect.mp3";
 
-    private AudioClip selectSound;
-
     private void Start()
     {
         buyStation.gameObject.SetActive(false);
@@ -90,6 +88,7 @@ public class BuyStationScript : MonoBehaviour
         globalWeaponList = new List<WeaponClass>
         {
             new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, 15, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png"),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, 10, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png"),
         };
     }
 
