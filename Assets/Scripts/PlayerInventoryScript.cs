@@ -21,8 +21,8 @@ public class PlayerInventoryScript : MonoBehaviour
     {
         InitializeInventory();
         currentWeapon = (WeaponClass)inventory.GetSecondaryWeapon();
-        secondaryWeaponHotBar.GetComponent<Outline>().effectColor = Color.green;
-        UpdateWeaponHotbarSprites();  
+        UpdateWeaponHotbarSprites();
+        ToggleSecondaryHotbar();
     }
 
     public void UpdateWeaponHotbarSprites()
@@ -48,19 +48,29 @@ public class PlayerInventoryScript : MonoBehaviour
        );
     }
 
+    private void ToggleSecondaryHotbar()
+    {
+            gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetSecondaryWeapon());
+            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
+            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
+    }
+
+    private void TogglePrimaryHotbar()
+    {
+            gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetPrimaryWeapon());
+            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
+            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
+    }
+
     private void CheckInput()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1) && inventory.GetPrimaryWeapon() != null) 
         {
-            gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetPrimaryWeapon());
-            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
-            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
+            TogglePrimaryHotbar();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && inventory.GetSecondaryWeapon() != null)
         {
-            gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetSecondaryWeapon());
-            primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
-            secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
+            ToggleSecondaryHotbar();
         }
     }
 

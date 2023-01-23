@@ -35,13 +35,9 @@ public class BuyStationScript : MonoBehaviour
 
     private void Update()
     {
-        if (interacting && Input.GetKeyDown(KeyCode.F))
-        {
-            // todo: exit buy station
-            buyStation.gameObject.SetActive(false);
-            mainScreen.gameObject.SetActive(true);
-            ToggleCursor();
-            interacting = false;
+        if (Input.GetKeyDown(KeyCode.F))
+        {            
+            CheckBuyStation();
         }
     }
 
@@ -72,6 +68,16 @@ public class BuyStationScript : MonoBehaviour
 
     private void CheckBuyStation()
     {
+        if (interacting)
+        {
+            // todo: exit buy station
+            buyStation.gameObject.SetActive(false);
+            mainScreen.gameObject.SetActive(true);
+            ToggleCursor();
+            interacting = false;
+            return;
+        }
+
         // todo: enter buy station
         buyStation.gameObject.SetActive(true);
         mainScreen.gameObject.SetActive(false);
@@ -91,13 +97,6 @@ public class BuyStationScript : MonoBehaviour
     {
         Cursor.visible = !Cursor.visible;
         Cursor.lockState = Cursor.lockState == CursorLockMode.Confined ? CursorLockMode.Locked : CursorLockMode.Confined;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Buystation") { 
-            CheckBuyStation();
-        }
     }
 
     private void PlaySelectSound()
