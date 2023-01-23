@@ -41,7 +41,7 @@ public class ZombieScript : MonoBehaviour
                         targetPosition,
                         movementSpeed * Time.deltaTime);
                     transform.LookAt(allPlayers[0].transform);
-                }
+                } 
             }
         }
     }
