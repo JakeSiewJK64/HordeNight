@@ -33,10 +33,11 @@ public class ZombieScript : MonoBehaviour
     private void InitializeZombie()
     {
         zombie = new Zombie(
-            (float)Random.Range(0.5f, 3), 
+            (float)Random.Range(0.5f, 6), 
             100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon),
             .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon)
         );
+        Debug.Log(zombie.speed);
     }
 
     private GameObject GetPlayer()

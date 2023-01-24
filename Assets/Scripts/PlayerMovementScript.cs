@@ -19,13 +19,30 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
+        controller.height = 0;
         animatorController = GetComponentInChildren<Animator>();
+    }
+
+    private void SetIdleAnimation()
+    {
+        switch (GetComponent<BulletSpawnScript>().GetCurrentWeapon().weaponType)
+        {
+            case WeaponType.Sidearm:
+                animatorController.SetBool("PistolIdle", true);
+                animatorController.SetBool("RifleIdle", false);
+                break;
+            default:
+                animatorController.SetBool("PistolIdle", false);
+                animatorController.SetBool("RifleIdle", true);
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         groundedPlayer = controller.isGrounded;
+
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -37,11 +54,23 @@ public class PlayerMovementScript : MonoBehaviour
         if (!GetComponent<BuyStationScript>().interacting)
         {
             if(move != Vector3.zero) {
+                animatorController.SetBool("PistolIdle", false);
+                animatorController.SetBool("RifleIdle", false);
                 controller.Move(move * Time.deltaTime * (shiftPressed ? playerSpeed * sprintSpeed : playerSpeed));
-                animatorController.SetBool("IsWalking", true);
+                switch (GetComponent<BulletSpawnScript>().GetCurrentWeapon().weaponType)
+                {
+                    case WeaponType.Sidearm:
+                        animatorController.SetBool("PistolWalking", true);
+                        break;
+                    default:
+                        animatorController.SetBool("RifleWalking", true);
+                        break;
+                }
             } else
             {
-                animatorController.SetBool("IsWalking", false);
+                animatorController.SetBool("PistolWalking", false);
+                animatorController.SetBool("RifleWalking", false);
+                SetIdleAnimation();
             }
 
             // Changes the height position of the player..

@@ -21,7 +21,7 @@ public class BulletSpawnScript : MonoBehaviour
     public float bulletLifetime = 2f;
     public float lastClickTime;
 
-    public WeaponClass currentWeapon;
+    private WeaponClass currentWeapon;
     private AudioSource audioSource;
 
     private AudioClip reloadSound;
@@ -38,6 +38,11 @@ public class BulletSpawnScript : MonoBehaviour
         weaponTypeIndicator.text = currentWeapon.name;
         UpdateWeaponSound();
     }  
+
+    public WeaponClass GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
 
     private void Start()
     {

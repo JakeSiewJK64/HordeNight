@@ -227,10 +227,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.55112386
-  m_Height: 4.399788
+  m_Radius: 0.9757594
+  m_Height: 4.0306706
   m_Direction: 1
-  m_Center: {x: 0.009456396, y: 1.199894, z: 0}
+  m_Center: {x: -0.027468324, y: 1.1998289, z: 0}
 --- !u!54 &7630067070074283869
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00c227ea09c0064081577bebe77bd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieController: {fileID: 0}
   followRadius: 500
   textMesh: {fileID: 6438396213484737055}
 --- !u!1001 &2677178186606997307
