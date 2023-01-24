@@ -47,12 +47,6 @@ public class ZombieSpawnScript : MonoBehaviour
             Checkspawnpad();
             GameObject spawnPad = spawnPads[Random.Range(0, spawnPads.Count - 1)];
             spawnPos = new Vector3(spawnPad.transform.position.x, spawnPad.transform.position.y + 3, spawnPad.transform.position.z);
-
-            float health = 100 + 100 * (GetComponent<ZombiesKillCounterScript>().round / GetComponent<ZombiesKillCounterScript>().bloodmoon);
-            float damage = 10 + 10 * (GetComponent<ZombiesKillCounterScript>().round / GetComponent<ZombiesKillCounterScript>().bloodmoon);
-
-            Zombie zombieToSpawn = new Zombie((float)Random.Range(0.5f, 3), health, damage);
-
             Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
             lastZombieSpawnTime = Time.time;
         }
