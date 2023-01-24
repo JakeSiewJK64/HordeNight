@@ -2522,6 +2522,7 @@ GameObject:
   - component: {fileID: 5913885122768181622}
   - component: {fileID: 5610828007081371552}
   - component: {fileID: 301681790956641038}
+  - component: {fileID: 1914851646993345304}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2741,6 +2742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 7630067070074283868, guid: 51c900fe7303f2344ad1d9b7feca12c1, type: 3}
+  player: {fileID: 7555644347600612634}
   spawnPads: []
   spawnRadius: 1000
   restrictedSpawnRadius: 10
@@ -2751,9 +2753,8 @@ MonoBehaviour:
   remainingZombies: 0
   zombieCounter: {fileID: 3068760929249543766}
   roundCounter: {fileID: 7819705000696061869}
-  bloodmoon: 0
+  bloodmoon: 1
   spawnPos: {x: 0, y: 0, z: 0}
-  spawning: 1
 --- !u!114 &7821256837680257889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2816,6 +2817,18 @@ MonoBehaviour:
   damage: {fileID: 1086510363038387080}
   reloadSpeed: {fileID: 8713923529958258388}
   magSize: {fileID: 2740043578923954216}
+--- !u!114 &1914851646993345304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555644347600612634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4645f06d14d03448bfe451fcd4c12b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8117748216027961758
 GameObject:
   m_ObjectHideFlags: 0
