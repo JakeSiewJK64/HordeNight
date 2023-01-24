@@ -1,23 +1,25 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZombieScript : MonoBehaviour
 {
     public Zombie zombie;
     private GameObject player;
+    private Animator zombieController;
 
     [SerializeField]
     private float followRadius = 500f;
 
     [SerializeField]
     private TextMeshPro textMesh;
+
     private void Start()
     {
+        zombieController = GetComponentInChildren<Animator>();
         player = GetPlayer();
         float health = 100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
-        float damage = 10 + 10 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
+        float damage = .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
 
         zombie = new Zombie((float)Random.Range(0.5f, 3), health, damage);
     }
@@ -71,29 +73,21 @@ public class ZombieScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player" && collision != null && gameObject != null)
             {
+                zombieController.SetBool("Attacking", true);
                 if (collision.gameObject.GetComponent<PlayerHealthScript>().player.health > 0)
                 {
                     collision.gameObject.GetComponent<PlayerHealthScript>().player.TakeDamage(zombie.damage);
+                    return;
                 }
+            } else
+            {
+                zombieController.SetBool("Attacking", false);
             }
         } catch { }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        TakePlayerDamage(collision);
-        StartCoroutine(DelayDamage(collision));
-    }
-
     private void OnCollisionStay(Collision collision)
     {
-        TakePlayerDamage(collision);
-        StartCoroutine(DelayDamage(collision));
-    }
-
-    public IEnumerator DelayDamage(Collision collision)
-    {
-        yield return new WaitForSeconds(2f);
         TakePlayerDamage(collision);
     }
 }

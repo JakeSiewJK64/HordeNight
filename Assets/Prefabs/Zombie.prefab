@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00c227ea09c0064081577bebe77bd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7555644347600612634, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+  zombieController: {fileID: 0}
   followRadius: 500
   textMesh: {fileID: 6438396213484737055}
 --- !u!1001 &2677178186606997307

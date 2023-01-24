@@ -2742,18 +2742,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 7630067070074283868, guid: 51c900fe7303f2344ad1d9b7feca12c1, type: 3}
-  player: {fileID: 7555644347600612634}
   spawnPads: []
   spawnRadius: 1000
   restrictedSpawnRadius: 10
   minDistanceFromPlayer: 20
-  round: 0
   spawnYAxis: 4
-  maxZombies: 0
   remainingZombies: 0
   zombieCounter: {fileID: 3068760929249543766}
   roundCounter: {fileID: 7819705000696061869}
-  bloodmoon: 1
   spawnPos: {x: 0, y: 0, z: 0}
 --- !u!114 &7821256837680257889
 MonoBehaviour:
@@ -2829,6 +2825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4645f06d14d03448bfe451fcd4c12b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  round: 0
+  bloodmoon: 0
 --- !u!1 &8117748216027961758
 GameObject:
   m_ObjectHideFlags: 0
@@ -3681,6 +3679,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: debd042cba0048b44969fe26d8a40e05, type: 3}
       propertyPath: m_Name
       value: Ch35_nonPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: debd042cba0048b44969fe26d8a40e05, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: debd042cba0048b44969fe26d8a40e05, type: 3}
