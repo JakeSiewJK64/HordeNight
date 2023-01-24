@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -18,10 +17,7 @@ public class ZombieScript : MonoBehaviour
     {
         zombieController = GetComponentInChildren<Animator>();
         player = GetPlayer();
-        float health = 100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
-        float damage = .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
-
-        zombie = new Zombie((float)Random.Range(0.5f, 3), health, damage);
+        InitializeZombie();
     }
 
     private void HealthCheck()
@@ -30,7 +26,17 @@ public class ZombieScript : MonoBehaviour
         {
             Destroy(gameObject);
             player.GetComponent<ZombiesKillCounterScript>().IncrementCounter();
+            player.GetComponent<PlayerPointScript>().IncrementPoints(100);
         }
+    }
+
+    private void InitializeZombie()
+    {
+        zombie = new Zombie(
+            (float)Random.Range(0.5f, 3), 
+            100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon),
+            .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon)
+        );
     }
 
     private GameObject GetPlayer()
