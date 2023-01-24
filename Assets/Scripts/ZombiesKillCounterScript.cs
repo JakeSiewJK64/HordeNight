@@ -20,7 +20,7 @@ public class ZombiesKillCounterScript : MonoBehaviour
 
     private void Awake()
     {
-        bloodmoon = 2;
+        bloodmoon = 7;
         ChangeRound();
     }
 

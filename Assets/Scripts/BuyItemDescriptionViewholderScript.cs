@@ -13,10 +13,9 @@ public class BuyItemDescriptionViewholderScript : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI magSize;
-
-    private void Start()
-    {
-    }
+    
+    [SerializeField]
+    private TextMeshProUGUI price;
 
     public void UpdateDescription(Item item)
     {
@@ -26,6 +25,7 @@ public class BuyItemDescriptionViewholderScript : MonoBehaviour
             damage.text = "Damage: " + ((WeaponClass)item).damage;
             reloadSpeed.text = "Reload Time: " + ((WeaponClass)item).reloadTime.ToString() + "s";
             magSize.text = "Magazine Size: " + ((WeaponClass)item).magazineSize.ToString();
+            price.text = "Price: " + ((WeaponClass)item).price.ToString() + " pts";
         }
     }
 

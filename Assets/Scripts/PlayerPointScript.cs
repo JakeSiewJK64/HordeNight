@@ -22,6 +22,11 @@ public class PlayerPointScript : MonoBehaviour
     {
         points += amount;
     }
+    
+    public void DeductPoints(float amount)
+    {
+        points -= amount;
+    }
 
     public float GetPoints()
     {

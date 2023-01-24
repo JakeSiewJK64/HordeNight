@@ -33,6 +33,7 @@ public class BuyStationScript : MonoBehaviour
 
     private void Update()
     {
+        CheckSelectedItem();
         if (Input.GetKeyDown(KeyCode.F))
         {            
             CheckBuyStation();
@@ -48,7 +49,7 @@ public class BuyStationScript : MonoBehaviour
         } else
         {
             descriptionPanel.gameObject.SetActive(true);
-            buyButton.gameObject.SetActive(true);
+            buyButton.gameObject.SetActive(GetComponent<PlayerPointScript>().GetPoints() >= selectedItem.price);
         }
     }
 
@@ -87,8 +88,8 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, 15, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab"),
-            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, 10, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab"),
+            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, 15, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, 10, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 1000)
         };
     }
 
@@ -123,6 +124,8 @@ public class BuyStationScript : MonoBehaviour
         }
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
         gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);
+        gameObject.GetComponent<PlayerPointScript>().DeductPoints(selectedItem.price);
+        selectedItem.price *= 2;
     }
 
     public void OnBuyButtonPressed()
