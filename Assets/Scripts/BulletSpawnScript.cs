@@ -37,6 +37,14 @@ public class BulletSpawnScript : MonoBehaviour
         reloading = false;
         weaponTypeIndicator.text = currentWeapon.name;
         UpdateWeaponSound();
+
+        if(currentWeapon.weaponHolding == WeaponHolding.SECONDARY)
+        {
+            GetComponent<PlayerWeaponModelScript>().UpdateSecondary(currentWeapon.weaponPrefabPath);
+        } else
+        {
+            GetComponent<PlayerWeaponModelScript>().UpdatePrimary(currentWeapon.weaponPrefabPath);
+        }
     }  
 
     public WeaponClass GetCurrentWeapon()

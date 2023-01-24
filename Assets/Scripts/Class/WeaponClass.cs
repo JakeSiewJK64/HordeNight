@@ -10,6 +10,7 @@ public class WeaponClass : Item
     public string shootingSoundPath;
     public string reloadingSoundPath;
     public string weaponIconPath;
+    public string weaponPrefabPath;
 
     public WeaponClass(
         string name, 
@@ -24,7 +25,8 @@ public class WeaponClass : Item
         float reloadTime,
         string shootingSoundPath,
         string reloadingSoundPath,
-        string weaponIconPath) : base(name, description, itemType)
+        string weaponIconPath,
+        string weaponPrefabPath) : base(name, description, itemType)
     {
         this.weaponType = weaponType;
         this.weaponHolding = weaponHolding;
@@ -36,6 +38,7 @@ public class WeaponClass : Item
         this.shootingSoundPath = shootingSoundPath;
         this.reloadingSoundPath = reloadingSoundPath;
         this.weaponIconPath = weaponIconPath;
+        this.weaponPrefabPath = weaponPrefabPath;
     }
 
     public void Reload()

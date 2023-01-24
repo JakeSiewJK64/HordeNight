@@ -13,8 +13,12 @@ public class ZombieScript : MonoBehaviour
     [SerializeField]
     private TextMeshPro textMesh;
 
+    [SerializeField]
+    private bool showHealth;
+
     private void Start()
     {
+        textMesh.gameObject.SetActive(showHealth);
         zombieController = GetComponentInChildren<Animator>();
         player = GetPlayer();
         InitializeZombie();
@@ -37,7 +41,6 @@ public class ZombieScript : MonoBehaviour
             100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon),
             .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon)
         );
-        Debug.Log(zombie.speed);
     }
 
     private GameObject GetPlayer()
