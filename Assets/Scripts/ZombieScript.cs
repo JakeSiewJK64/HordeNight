@@ -1,48 +1,67 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZombieScript : MonoBehaviour
 {
-    public Zombie zombie = new Zombie(100, .125f);
-    public GameObject player;
+    public Zombie zombie;
+    private GameObject player;
 
     [SerializeField]
     private float followRadius = 500f;
 
     [SerializeField]
     private TextMeshPro textMesh;
+    private void Start()
+    {
+        player = GetPlayer();
+        float health = 100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
+        float damage = 10 + 10 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon);
+
+        zombie = new Zombie((float)Random.Range(0.5f, 3), health, damage);
+    }
 
     private void HealthCheck()
     {
-        if(zombie.health <= 0)
+        if (zombie.health <= 0)
         {
             Destroy(gameObject);
+            player.GetComponent<ZombiesKillCounterScript>().IncrementCounter();
         }
+    }
+
+    private GameObject GetPlayer()
+    {
+        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in allPlayers)
+        {
+            if (player)
+            {
+                return player;                
+            }
+        }
+        return null;
     }
 
     private void Update()
     {
-        HealthCheck();
+
         textMesh.text = zombie.health.ToString();
-        float movementSpeed = Random.Range(0.5f, 3);
-        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-           
-        foreach (GameObject player in allPlayers)
+
+        HealthCheck();
+        player = GetPlayer();
+
+        float distanceFromTarget = Vector3.Distance(transform.position, player.transform.position);
+        if (distanceFromTarget <= followRadius)
         {
-            if(player)
-            {
-                float distanceFromTarget = Vector3.Distance(transform.position, allPlayers[0].transform.position);
-                if (distanceFromTarget <= followRadius)
-                {
-                    Vector3 targetPosition = allPlayers[0].transform.position;
-                    transform.position = Vector3.MoveTowards(
-                        transform.position,
-                        targetPosition,
-                        movementSpeed * Time.deltaTime);
-                    transform.LookAt(allPlayers[0].transform);
-                } 
-            }
+            Vector3 targetPosition = player.transform.position;
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPosition,
+                2 * Time.deltaTime);
+            transform.LookAt(player.transform);
         }
     }
 
