@@ -70,9 +70,12 @@ public class BuyStationScript : MonoBehaviour
         if (interacting)
         {
             // todo: exit buy station
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            
             buyStation.gameObject.SetActive(false);
             mainScreen.gameObject.SetActive(true);
-            ToggleCursor();
+
             interacting = false;
             return;
         }
@@ -80,23 +83,21 @@ public class BuyStationScript : MonoBehaviour
         // todo: enter buy station
         buyStation.gameObject.SetActive(true);
         mainScreen.gameObject.SetActive(false);
-        ToggleCursor();            
+        
         interacting = true;
+        
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void InitializeWeaponList()
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("m4", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, 90, 15, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
-            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, 300, 10, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 1000)
+            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, damage: 80, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, damage: 85, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
+            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, damage: 100, 8, 8, .5f, 5f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500)
         };
-    }
-
-    private void ToggleCursor()
-    {
-        Cursor.visible = !Cursor.visible;
-        Cursor.lockState = Cursor.lockState == CursorLockMode.Confined ? CursorLockMode.Locked : CursorLockMode.Confined;
     }
 
     private void PlaySelectSound()

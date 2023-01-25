@@ -3,9 +3,13 @@ using UnityEngine;
 public class ZombiesKillCounterScript : MonoBehaviour
 {
     private int zombiesKilled;
-    public int round;
-    public int bloodmoon;
     private int maxZombies;
+
+    [System.NonSerialized]
+    public int round;
+
+    [System.NonSerialized]
+    public int bloodmoon;
 
     public int GetMaxZombies()
     {

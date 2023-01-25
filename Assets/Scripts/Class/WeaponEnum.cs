@@ -1,8 +1,8 @@
 public enum WeaponType
 {
-    AssaultRifle = 10,
-    Sidearm = 5,
-    Shotgun = 15,
-    Sniper = 20,
-    LMG = 15,
+    Sidearm = 1,
+    Shotgun = 2,
+    AssaultRifle = 3,
+    LMG = 4,
+    Sniper = 5,
 }
