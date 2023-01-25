@@ -89,14 +89,19 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void Reload()
     {
-        reloading = true;
-        currentWeapon.Reload();
-        playWeaponSound(reloadSound);        
+        if(currentWeapon.reserveAmmo > 0)
+        {
+            reloading = true;
+            currentWeapon.Reload();
+            Debug.Log(currentWeapon.reserveAmmo);
+            Debug.Log(currentWeapon.currentBullets);
+            playWeaponSound(reloadSound);        
+        }
     }
 
     private void UpdateBulletCount()
     {
-        bulletCounterIndicator.text = currentWeapon.currentBullets + " / " + currentWeapon.magazineSize;
+        bulletCounterIndicator.text = currentWeapon.currentBullets + " / " + currentWeapon.reserveAmmo;
     }
 
     private void Shoot()

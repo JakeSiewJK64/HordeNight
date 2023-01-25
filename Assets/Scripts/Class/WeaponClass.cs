@@ -1,9 +1,12 @@
+using System.Diagnostics;
+
 public class WeaponClass : Item
 {
     public WeaponType weaponType;
     public WeaponHolding weaponHolding;
+    public float reserveAmmo;
     public int damage;
-    public int magazineSize;
+    public float magazineSize;
     public float currentBullets;
     public float fireRate;
     public float reloadTime;
@@ -18,8 +21,9 @@ public class WeaponClass : Item
         ItemType itemType,
         WeaponType weaponType,
         WeaponHolding weaponHolding,
+        float reserveAmmo,
         int damage,
-        int magazineSize,
+        float magazineSize,
         float currentBullets,
         float fireRate,
         float reloadTime,
@@ -31,6 +35,7 @@ public class WeaponClass : Item
     {
         this.weaponType = weaponType;
         this.weaponHolding = weaponHolding;
+        this.reserveAmmo = reserveAmmo;
         this.damage = damage;
         this.magazineSize = magazineSize;
         this.currentBullets = currentBullets;
@@ -45,6 +50,23 @@ public class WeaponClass : Item
 
     public void Reload()
     {
-        currentBullets = magazineSize;
+        if(reserveAmmo > 0)
+        {
+            if(reserveAmmo > magazineSize)
+            {
+                if (currentBullets > 0)
+                {
+                    reserveAmmo -= magazineSize - currentBullets;
+                    currentBullets = magazineSize;
+                    return;
+                }
+                currentBullets = magazineSize;
+                reserveAmmo -= magazineSize;
+            } else
+            {
+                currentBullets = reserveAmmo;
+                reserveAmmo -= currentBullets;
+            }
+        }
     }
 }
