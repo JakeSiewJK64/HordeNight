@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealthScript : MonoBehaviour
 {
     [SerializeField]
-    private GameObject healthbar;
+    private Image healthbar;
 
     public Player player;
 
@@ -19,7 +20,7 @@ public class PlayerHealthScript : MonoBehaviour
         {
             ProcessDeath();
         }
-        healthbar.transform.localScale = new Vector3((player.health / 100) * 2, .125f, .125f);
+        healthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((player.health / 100) * 250, 100);
     }
 
     private void ProcessDeath()

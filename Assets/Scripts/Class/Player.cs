@@ -1,10 +1,20 @@
 public class Player : CharacterClass
 {
-    public float Stamina { get; set; }
+    public float stamina { get; set; }
 
     public Player(float health, float stamina, float damage) : base(health, damage)
     {
-        Stamina = stamina;
+        this.stamina = stamina;
+    }
+
+    public void ReduceStamina(float amount)
+    {
+        stamina -= amount;
+    }
+    
+    public void GainStamina(float amount)
+    {
+        stamina += amount;
     }
 
     public void TakeDamage(float damage)

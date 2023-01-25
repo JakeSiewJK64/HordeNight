@@ -11,6 +11,7 @@ public class PlayerMovementScript : MonoBehaviour
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
+    private float dodgeForce = 1000f;
 
     [SerializeField]
     private float sprintSpeed;
@@ -21,6 +22,7 @@ public class PlayerMovementScript : MonoBehaviour
         controller = gameObject.AddComponent<CharacterController>();
         controller.height = 0;
         animatorController = GetComponentInChildren<Animator>();
+        animatorController.SetBool("Dodgerolling", false);
     }
 
     private void SetIdleAnimation()
@@ -36,6 +38,31 @@ public class PlayerMovementScript : MonoBehaviour
                 animatorController.SetBool("RifleIdle", true);
                 break;
         }
+    }
+
+    private void CheckSlideAnimation()
+    {
+        try
+        {
+            // check if slide animation is playing
+            if (animatorController.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
+            {
+                // check if slide animation is finished
+                if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                {
+                    // transition to running animation
+                    animatorController.Play("Idle", 0, 0.0f);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift) && !animatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Idle"))
+            {
+                GetComponent<PlayerHealthScript>().player.ReduceStamina(80f);
+                controller.Move(transform.forward * Time.deltaTime * dodgeForce);
+                animatorController.Play("Slide", 0, 0.0f);
+            }
+        }
+        catch { }
     }
 
     // Update is called once per frame
@@ -57,6 +84,12 @@ public class PlayerMovementScript : MonoBehaviour
                 animatorController.SetBool("PistolIdle", false);
                 animatorController.SetBool("RifleIdle", false);
                 controller.Move(move * Time.deltaTime * (shiftPressed ? playerSpeed * sprintSpeed : playerSpeed));
+
+                if(shiftPressed)
+                {
+                    GetComponent<PlayerHealthScript>().player.ReduceStamina(.5f);
+                }
+
                 switch (GetComponent<BulletSpawnScript>().GetCurrentWeapon().weaponType)
                 {
                     case WeaponType.Sidearm:
@@ -73,12 +106,7 @@ public class PlayerMovementScript : MonoBehaviour
                 SetIdleAnimation();
             }
 
-            // Changes the height position of the player..
-            if (Input.GetButtonDown("Jump") && groundedPlayer)
-            {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            }
-
+            CheckSlideAnimation();
             playerVelocity.y += gravityValue * Time.deltaTime;
             controller.Move(playerVelocity * Time.deltaTime);
         }
