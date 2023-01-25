@@ -6,14 +6,16 @@ public class PlayerStaminaScript : MonoBehaviour
     [SerializeField]
     private Image staminaBar;
 
-    float speed = 2.0f;
+    float regenerationSpeed = 10f;
+    float staminabarLength = 250f;
+    float staminabarHeight = 100f;
 
     private void Update()
     {
         if(GetComponent<PlayerHealthScript>().player.stamina < 100)
         {
-            GetComponent<PlayerHealthScript>().player.GainStamina(Time.deltaTime * 10);
+            GetComponent<PlayerHealthScript>().player.GainStamina(Time.deltaTime * regenerationSpeed);
         }
-        staminaBar.GetComponent<RectTransform>().sizeDelta = new Vector2((GetComponent<PlayerHealthScript>().player.stamina / 100) * 250, 100);
+        staminaBar.GetComponent<RectTransform>().sizeDelta = new Vector2((GetComponent<PlayerHealthScript>().player.stamina / 100) * staminabarLength, staminabarHeight);
     }
 }

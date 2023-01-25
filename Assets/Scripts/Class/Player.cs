@@ -21,4 +21,9 @@ public class Player : CharacterClass
     {
         health -= damage;
     }
+
+    public void GainHealth(float amount)
+    {
+        health += amount;
+    }
 }

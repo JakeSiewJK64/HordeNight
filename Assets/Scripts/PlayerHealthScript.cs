@@ -3,10 +3,15 @@ using UnityEngine.UI;
 
 public class PlayerHealthScript : MonoBehaviour
 {
+    public Player player;
+
     [SerializeField]
     private Image healthbar;
+    
+    float regenerationSpeed = .5f;
+    float healthbarLength = 250f;
+    float healthbarHeight = 100f;
 
-    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -14,13 +19,14 @@ public class PlayerHealthScript : MonoBehaviour
         player = new Player(100, 100 , 5);
     }
 
+
     private void Update()
     {
-        if (player.health <= 0)
+        if (GetComponent<PlayerHealthScript>().player.health < 100)
         {
-            ProcessDeath();
+            GetComponent<PlayerHealthScript>().player.GainHealth(Time.deltaTime * regenerationSpeed);
         }
-        healthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((player.health / 100) * 250, 100);
+        healthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((GetComponent<PlayerHealthScript>().player.health / 100) * healthbarLength, healthbarHeight);
     }
 
     private void ProcessDeath()

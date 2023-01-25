@@ -55,7 +55,10 @@ public class PlayerMovementScript : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift) && !animatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Idle"))
+            if (Input.GetKeyDown(KeyCode.Space) && 
+                Input.GetKey(KeyCode.LeftShift) && 
+                !animatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Idle") && 
+                GetComponent<PlayerHealthScript>().player.stamina >= 80f)
             {
                 GetComponent<PlayerHealthScript>().player.ReduceStamina(80f);
                 controller.Move(transform.forward * Time.deltaTime * dodgeForce);
@@ -81,11 +84,13 @@ public class PlayerMovementScript : MonoBehaviour
         if (!GetComponent<BuyStationScript>().interacting)
         {
             if(move != Vector3.zero) {
+
                 animatorController.SetBool("PistolIdle", false);
                 animatorController.SetBool("RifleIdle", false);
+                
                 controller.Move(move * Time.deltaTime * (shiftPressed ? playerSpeed * sprintSpeed : playerSpeed));
 
-                if(shiftPressed)
+                if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > .5f)
                 {
                     GetComponent<PlayerHealthScript>().player.ReduceStamina(.5f);
                 }
