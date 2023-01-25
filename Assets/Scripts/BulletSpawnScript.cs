@@ -126,10 +126,10 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void Update()
     {
-        UpdateBulletCount();
-        checkReloading();      
-        if(!GetComponent<BuyStationScript>().interacting)
+        if (!GetComponent<BuyStationScript>().interacting && Time.timeScale == 1.0f)
         {
+            UpdateBulletCount();
+            checkReloading();      
             if (currentWeapon.currentBullets == 0)
             {
                 Reload();

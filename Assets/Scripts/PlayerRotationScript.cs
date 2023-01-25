@@ -7,7 +7,6 @@ public class PlayerRotationScript : MonoBehaviour
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-
-        transform.Rotate(0f,mouseX,0f);
+        transform.Rotate(0f, mouseX, 0f);
     }
 }
