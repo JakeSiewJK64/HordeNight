@@ -94,9 +94,9 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, damage: 80, 30, 30, .1f, 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
-            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, damage: 85, 150, 150, .1f, 5f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
-            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, damage: 100, 8, 8, .5f, 5f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500)
+            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
+            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500)
         };
     }
 
