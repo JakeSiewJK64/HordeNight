@@ -34,7 +34,7 @@ public class BuyStationScript : MonoBehaviour
     private void Update()
     {
         CheckSelectedItem();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && Time.timeScale == 1)
         {            
             CheckBuyStation();
         }

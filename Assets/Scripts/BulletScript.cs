@@ -6,13 +6,20 @@ public class BulletScript : MonoBehaviour
     public float damage;
     public ZombieScript zombieScript;
 
-    private Dictionary<string, System.Action<Collision>> actions 
+    private GameObject player;
+
+    private Dictionary<string, System.Action<Collision>> actions
         = new Dictionary<string, System.Action<Collision>>();
-    
+
     private void Start()
     {
         actions.Add("Zombie", HandleZombies);
         actions.Add("Environment", HandleEnvironment);
+    }
+
+    public void SetOriginPlayer(GameObject player)
+    {
+        this.player = player;
     }
 
     private void HandleEnvironment(Collision obj)
@@ -25,6 +32,11 @@ public class BulletScript : MonoBehaviour
         zombieScript =  obj.gameObject.GetComponent<ZombieScript>();
         zombieScript.zombie.health -= damage;
         Destroy(gameObject);
+
+        if(player)
+        {
+            player.GetComponent<PlayerPointScript>().IncrementPoints(10);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

@@ -93,8 +93,6 @@ public class BulletSpawnScript : MonoBehaviour
         {
             reloading = true;
             currentWeapon.Reload();
-            Debug.Log(currentWeapon.reserveAmmo);
-            Debug.Log(currentWeapon.currentBullets);
             playWeaponSound(reloadSound);        
         }
     }
@@ -114,6 +112,7 @@ public class BulletSpawnScript : MonoBehaviour
                 lastClickTime = Time.time;
                 bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float) currentWeapon.weaponType;
                 GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                bullet.GetComponent<BulletScript>().SetOriginPlayer(gameObject);
                 Rigidbody rb = bullet.GetComponent<Rigidbody>();
                 rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
 
