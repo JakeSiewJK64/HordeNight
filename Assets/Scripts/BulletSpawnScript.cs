@@ -143,7 +143,7 @@ public class BulletSpawnScript : MonoBehaviour
                 {
                     for (int i = 0; i < 12; i++)
                     {
-                        bullet = Instantiate(bulletPrefab, transform.position + transform.forward, Quaternion.identity);
+                        bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
                         bullet.GetComponent<BulletScript>().SetOriginPlayer(gameObject);
 
                         // setting the pellet spread

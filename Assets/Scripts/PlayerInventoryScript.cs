@@ -48,14 +48,14 @@ public class PlayerInventoryScript : MonoBehaviour
        );
     }
 
-    private void ToggleSecondaryHotbar()
+    public void ToggleSecondaryHotbar()
     {
             gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetSecondaryWeapon());
             primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(0, 0, 0, .2f);
             secondaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);
     }
 
-    private void TogglePrimaryHotbar()
+    public void TogglePrimaryHotbar()
     {
             gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)inventory.GetPrimaryWeapon());
             primaryWeaponHotBar.GetComponent<Outline>().effectColor = new Color(46, 204, 113, 1.0f);

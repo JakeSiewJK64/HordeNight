@@ -119,10 +119,12 @@ public class BuyStationScript : MonoBehaviour
         if (((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY)
         {
             gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetPrimaryWeapon((WeaponClass)selectedItem);
+            gameObject.GetComponent<PlayerInventoryScript>().TogglePrimaryHotbar();
         }
         else if (((WeaponClass)selectedItem).weaponHolding == WeaponHolding.SECONDARY)
         {
             gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetSecondaryWeapon((WeaponClass)selectedItem);
+            gameObject.GetComponent<PlayerInventoryScript>().ToggleSecondaryHotbar();
         }
         ((WeaponClass)selectedItem).ResetReserveAmmo();
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();

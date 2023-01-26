@@ -11,8 +11,7 @@ public class PlayerHealthScript : MonoBehaviour
     float regenerationSpeed = .5f;
     float healthbarLength = 250f;
     float healthbarHeight = 100f;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +23,13 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (GetComponent<PlayerHealthScript>().player.health < 100)
         {
+            if(GetComponent<PlayerHealthScript>().player.health <= 0)
+            {
+                ProcessDeath();
+            }
             GetComponent<PlayerHealthScript>().player.GainHealth(Time.deltaTime * regenerationSpeed);
-        }
+        } 
+
         healthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((GetComponent<PlayerHealthScript>().player.health / 100) * healthbarLength, healthbarHeight);
     }
 

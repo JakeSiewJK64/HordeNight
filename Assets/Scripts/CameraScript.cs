@@ -14,7 +14,7 @@ public class CameraScript : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void LateUpdate()
+    void Update ()
     {
         float wantedHeight = target.position.y + height;
         float currentRotationAngle = transform.eulerAngles.y;

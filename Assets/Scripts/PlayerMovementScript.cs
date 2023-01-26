@@ -11,7 +11,8 @@ public class PlayerMovementScript : MonoBehaviour
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
-    private float dodgeForce = 1000f;
+    private float dodgeForce = 50f;
+    private float dodgeStamina = 20f;
 
     [SerializeField]
     private float sprintSpeed;
@@ -52,17 +53,20 @@ public class PlayerMovementScript : MonoBehaviour
                 {
                     // transition to running animation
                     animatorController.Play("Idle", 0, 0.0f);
+                    GetComponent<PlayerHealthScript>().player.immune = false;
+                    GetComponent<Collider>().isTrigger = false;
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && 
-                Input.GetKey(KeyCode.LeftShift) && 
-                !animatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Idle") && 
-                GetComponent<PlayerHealthScript>().player.stamina >= 80f)
+                Input.GetKey(KeyCode.LeftShift) &&                 
+                GetComponent<PlayerHealthScript>().player.stamina >= dodgeStamina)
             {
-                GetComponent<PlayerHealthScript>().player.ReduceStamina(80f);
+                GetComponent<PlayerHealthScript>().player.ReduceStamina(dodgeStamina);
                 controller.Move(transform.forward * Time.deltaTime * dodgeForce);
                 animatorController.Play("Slide", 0, 0.0f);
+                GetComponent<PlayerHealthScript>().player.immune = true;
+                    GetComponent<Collider>().isTrigger = true;
             }
         }
         catch { }

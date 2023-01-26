@@ -1,6 +1,8 @@
 public class Player : CharacterClass
 {
     public float stamina { get; set; }
+    public bool immune { get; set; }
+
 
     public Player(float health, float stamina, float damage) : base(health, damage)
     {
@@ -19,7 +21,10 @@ public class Player : CharacterClass
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        if(!immune)
+        {
+            health -= damage;
+        }
     }
 
     public void GainHealth(float amount)
