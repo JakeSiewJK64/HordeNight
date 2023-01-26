@@ -458,7 +458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8501825704486339111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2997946961299396043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1604,7 +1604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5582714386252100750
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2454,7 +2454,7 @@ GameObject:
   - component: {fileID: 7247568008376504199}
   m_Layer: 0
   m_Name: PlayerBody
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3680,6 +3680,7 @@ MonoBehaviour:
   bulletLifetime: 2
   lastClickTime: 0
   reloading: 0
+  spreadAngle: 1000
 --- !u!82 &9110104351569727320
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3852,12 +3853,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7555644347600612634}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.6379051
+  m_Radius: 0.5541184
   m_Height: 3.5890179
   m_Direction: 1
-  m_Center: {x: 0.08452225, y: 1.5258284, z: 0}
+  m_Center: {x: 0.08452225, y: 1.5258284, z: -0.083786726}
 --- !u!114 &301681790956641038
 MonoBehaviour:
   m_ObjectHideFlags: 0

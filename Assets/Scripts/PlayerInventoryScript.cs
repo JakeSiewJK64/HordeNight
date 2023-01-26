@@ -42,7 +42,7 @@ public class PlayerInventoryScript : MonoBehaviour
            new Dictionary<string, Item> {
                 { 
                    "Secondary", 
-                   new WeaponClass("glock 18", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 40, damage: 70, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png", "glock18.prefab", 1000)
+                   new WeaponClass("glock 18", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 40, startingAmmo: 40, damage: 70, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png", "glock18.prefab", 1000)
                 }
            }
        );

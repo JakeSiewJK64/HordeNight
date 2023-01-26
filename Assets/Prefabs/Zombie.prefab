@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followRadius: 500
   textMesh: {fileID: 6438396213484737055}
+  showHealth: 0
 --- !u!1001 &2677178186606997307
 PrefabInstance:
   m_ObjectHideFlags: 0

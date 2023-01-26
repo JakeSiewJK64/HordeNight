@@ -94,9 +94,10 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
-            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
-            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500)
+            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, startingAmmo: 90 , damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, startingAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
+            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500),
+            new WeaponClass("assault shotgun", "description", ItemType.Weapon, WeaponType.Shotgun, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo : 64, damage: 20, 8, 8, fireRate: 1f, reloadTime: 5f, "shotgun_shoot.mp3", "shotgun_reload.mp3", "assault_shotgun.png", "shotgun.prefab", 500)
         };
     }
 
@@ -123,6 +124,7 @@ public class BuyStationScript : MonoBehaviour
         {
             gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetSecondaryWeapon((WeaponClass)selectedItem);
         }
+        ((WeaponClass)selectedItem).ResetReserveAmmo();
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
         gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);
         gameObject.GetComponent<PlayerPointScript>().DeductPoints(selectedItem.price);

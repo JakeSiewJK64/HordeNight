@@ -5,6 +5,7 @@ public class WeaponClass : Item
     public WeaponType weaponType;
     public WeaponHolding weaponHolding;
     public float reserveAmmo;
+    public float startingAmmo;
     public int damage;
     public float magazineSize;
     public float currentBullets;
@@ -22,6 +23,7 @@ public class WeaponClass : Item
         WeaponType weaponType,
         WeaponHolding weaponHolding,
         float reserveAmmo,
+        float startingAmmo,
         int damage,
         float magazineSize,
         float currentBullets,
@@ -34,6 +36,7 @@ public class WeaponClass : Item
         float price) : base(name, description, itemType, price)
     {
         this.weaponType = weaponType;
+        this.startingAmmo = startingAmmo;
         this.weaponHolding = weaponHolding;
         this.reserveAmmo = reserveAmmo;
         this.damage = damage;
@@ -46,6 +49,11 @@ public class WeaponClass : Item
         this.weaponIconPath = weaponIconPath;
         this.weaponPrefabPath = weaponPrefabPath;
         this.price = price;
+    }
+
+    public void ResetReserveAmmo()
+    {
+        this.reserveAmmo = this.startingAmmo;
     }
 
     public void Reload()

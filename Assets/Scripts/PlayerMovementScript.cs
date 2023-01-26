@@ -79,6 +79,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
+        bool sprinting = false;
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         if (!GetComponent<BuyStationScript>().interacting)
@@ -88,12 +89,17 @@ public class PlayerMovementScript : MonoBehaviour
                 animatorController.SetBool("PistolIdle", false);
                 animatorController.SetBool("RifleIdle", false);
                 
-                controller.Move(move * Time.deltaTime * (shiftPressed ? playerSpeed * sprintSpeed : playerSpeed));
-
+                
                 if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > .5f)
                 {
                     GetComponent<PlayerHealthScript>().player.ReduceStamina(.5f);
+                    sprinting = true;
+                }  else
+                {
+                    sprinting = false;
                 }
+                
+                controller.Move(move * Time.deltaTime * (sprinting? playerSpeed * sprintSpeed : playerSpeed));
 
                 switch (GetComponent<BulletSpawnScript>().GetCurrentWeapon().weaponType)
                 {

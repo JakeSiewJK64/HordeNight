@@ -31,6 +31,9 @@ public class BulletSpawnScript : MonoBehaviour
 
     public Inventory inventory;
 
+    [SerializeField]
+    float spreadAngle = .5f;
+
     public void ChangeWeapon(WeaponClass newWeapon)
     {
         currentWeapon = newWeapon;
@@ -102,6 +105,14 @@ public class BulletSpawnScript : MonoBehaviour
         bulletCounterIndicator.text = currentWeapon.currentBullets + " / " + currentWeapon.reserveAmmo;
     }
 
+    private void SpawnBulletCasing(Rigidbody rb)
+    {
+        // trigger bullet casing effect
+        GameObject bulletCasing = Instantiate(bulletCasingPrefab, bulletCasingSpawn.position, bulletCasingSpawn.rotation);
+        rb.AddForce(bulletCasingPrefab.transform.forward);
+        Destroy(bulletCasing, bulletLifetime);
+    }
+
     private void Shoot()
     {
         if (Input.GetMouseButton(0) && !reloading)
@@ -110,20 +121,40 @@ public class BulletSpawnScript : MonoBehaviour
             {
                 currentWeapon.currentBullets--;
                 lastClickTime = Time.time;
-                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float) currentWeapon.weaponType;
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-                bullet.GetComponent<BulletScript>().SetOriginPlayer(gameObject);
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
+
+                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float)currentWeapon.weaponType;
 
                 // play shoot sound
                 playWeaponSound(shootingSound);
 
-                // trigger bullet casing effect
-                GameObject bulletCasing = Instantiate(bulletCasingPrefab, bulletCasingSpawn.position, bulletCasingSpawn.rotation);
-                rb.AddForce(bulletCasingPrefab.transform.forward);
-                Destroy(bullet, bulletLifetime);
-                Destroy(bulletCasing, bulletLifetime);
+
+                GameObject bullet;
+                Rigidbody rb;
+                if (currentWeapon.weaponType != WeaponType.Shotgun)
+                {
+                    bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                    bullet.GetComponent<BulletScript>().SetOriginPlayer(gameObject);
+                    rb = bullet.GetComponent<Rigidbody>();
+                    rb.AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.VelocityChange);
+                    SpawnBulletCasing(rb);
+                    Destroy(bullet, bulletLifetime);
+                }
+                else
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        bullet = Instantiate(bulletPrefab, transform.position + transform.forward, Quaternion.identity);
+                        bullet.GetComponent<BulletScript>().SetOriginPlayer(gameObject);
+
+                        // setting the pellet spread
+                        Vector3 spread = new Vector3(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle));
+                        
+                        bullet.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + spread);
+                        rb = bullet.GetComponent<Rigidbody>();
+                        rb.AddForce(transform.forward * bulletSpeed * 50);
+                        Destroy(bullet, bulletLifetime);
+                    }
+                }
             }
         }
     }
