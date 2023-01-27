@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerWeaponModelScript : MonoBehaviour
@@ -11,11 +10,11 @@ public class PlayerWeaponModelScript : MonoBehaviour
 
     private GameObject tempPrefab;
 
-    private string basePath = "Assets/Prefabs/WeaponPrefabs/";
+    private string basePath = "Prefabs\\WeaponPrefabs\\";
 
     private void UpdatePrefab(string name)
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(basePath + name);
+        GameObject prefab = Resources.Load(basePath + name) as GameObject;
         GameObject weapon = Instantiate(prefab, 
             secondaryWeaponHolder.activeSelf ? secondaryWeaponHolder.transform.position : primaryWeaponHolder.transform.position,
             secondaryWeaponHolder.activeSelf ? secondaryWeaponHolder.transform.rotation : primaryWeaponHolder.transform.rotation

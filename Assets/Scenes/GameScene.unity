@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 216680335}
   distance: 5
-  height: 30
+  height: 25
   heightDamping: 2
   rotationDamping: 3
 --- !u!135 &963194230
@@ -352,6 +352,22 @@ PrefabInstance:
     - target: {fileID: 1576047195463741134, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931713902793198893, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931713902793198893, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931713902793198893, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931713902793198893, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3034159476653558972, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_AnchorMax.y
@@ -447,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7555644347600612635, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -593.5024
+      value: -605.00244
       objectReference: {fileID: 0}
     - target: {fileID: 7555644347600612635, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -514,6 +530,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7545217548701422085, guid: 1632fd01543923a4681ba66d5cf7fc47, type: 3}
+      propertyPath: m_Range
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7545217548701422085, guid: 1632fd01543923a4681ba66d5cf7fc47, type: 3}
+      propertyPath: m_SpotAngle
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7545217548701422085, guid: 1632fd01543923a4681ba66d5cf7fc47, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8381080411013409929, guid: 1632fd01543923a4681ba66d5cf7fc47, type: 3}
       propertyPath: m_Name
       value: Environment

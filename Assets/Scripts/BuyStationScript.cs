@@ -10,7 +10,7 @@ public class BuyStationScript : MonoBehaviour
     private Canvas mainScreen, buyStation;
 
     [SerializeField]
-    private GameObject viewholder, descriptionPanel, buyButton;
+    private GameObject viewholder, descriptionPanel, buyButton, buyAmmo;
 
     [SerializeField]
     private ScrollRect scrollArea;
@@ -18,10 +18,10 @@ public class BuyStationScript : MonoBehaviour
     private List<WeaponClass> globalWeaponList;
 
     private Item selectedItem;
-
+    private float ammoPrice = 1000f;
     public bool interacting = false;
 
-    private string audioPath = "Assets/Raw/Sound/SoundEffects/menuSelect.mp3";
+    private string audioPath = "Raw\\Sound\\SoundEffects\\menuSelect";
 
     private void Start()
     {
@@ -42,14 +42,33 @@ public class BuyStationScript : MonoBehaviour
 
     private void CheckSelectedItem()
     {
-        if(selectedItem == null)
+        if (selectedItem == null)
         {
             descriptionPanel.gameObject.SetActive(false);
             buyButton.gameObject.SetActive(false);
+            buyAmmo.gameObject.SetActive(false);
         } else
         {
             descriptionPanel.gameObject.SetActive(true);
-            buyButton.gameObject.SetActive(GetComponent<PlayerPointScript>().GetPoints() >= selectedItem.price);
+
+            if(selectedItem.itemType == ItemType.Weapon)
+            {
+                if(((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY &&
+                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon() != null &&
+                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon().name == selectedItem.name ||
+                    ((WeaponClass)selectedItem).weaponHolding == WeaponHolding.SECONDARY &&
+                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon() != null &&
+                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name)
+                {
+                    // player already owns the weapon
+                    buyButton.gameObject.SetActive(false);
+                    buyAmmo.gameObject.SetActive(true);
+                } else 
+                {
+                    buyButton.gameObject.SetActive(true);
+                    buyAmmo.gameObject.SetActive(((WeaponClass)selectedItem).reserveAmmo != ((WeaponClass)selectedItem).startingAmmo);
+                }
+            }
         }
     }
 
@@ -97,16 +116,16 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, startingAmmo: 90 , damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02.wav", "glock_reload.mp3", "m4.png", "glock18.prefab", 1000),
-            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, startingAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02.wav", "Miniguns_loop/Minigun_Reload_04.wav", "m249.png", "m249.prefab", 3000),
-            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot.mp3", "rifle_reload.mp3", "m40a3.png", "m40a3.prefab", 1500),
-            new WeaponClass("assault shotgun", "description", ItemType.Weapon, WeaponType.Shotgun, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo : 64, damage: 20, 8, 8, fireRate: 1f, reloadTime: 5f, "shotgun_shoot.mp3", "shotgun_reload.mp3", "assault_shotgun.png", "shotgun.prefab", 500)
+            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, startingAmmo: 90 , damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02", "glock_reload", "m4", "glock18", 1000),
+            new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, startingAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02", "Miniguns_loop/Minigun_Reload_04", "m249", "m249", 3000),
+            new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot", "rifle_reload", "m40a3", "m40a3", 1500),
+            new WeaponClass("assault shotgun", "description", ItemType.Weapon, WeaponType.Shotgun, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo : 64, damage: 20, 8, 8, fireRate: 1f, reloadTime: 5f, "shotgun_shoot", "shotgun_reload", "assault_shotgun", "shotgun", 500)
         };
     }
 
     private void PlaySelectSound()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(AssetDatabase.LoadAssetAtPath<AudioClip>(Path.Combine(audioPath)));
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath)));
     }
 
     public void UpdateDescriptionPanel(Item item)
@@ -134,6 +153,12 @@ public class BuyStationScript : MonoBehaviour
         gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);
         gameObject.GetComponent<PlayerPointScript>().DeductPoints(selectedItem.price);
         selectedItem.price *= 2;
+    }
+
+    public void OnBuyAmmoButton()
+    {
+        ((WeaponClass)selectedItem).ResetReserveAmmo();
+        gameObject.GetComponent<PlayerPointScript>().DeductPoints(ammoPrice);
     }
 
     public void OnBuyButtonPressed()

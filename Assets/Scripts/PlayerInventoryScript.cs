@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,7 @@ public class PlayerInventoryScript : MonoBehaviour
     private Inventory inventory;
     private WeaponClass currentWeapon;
 
-    private string imagePath = "Assets/Raw/Img/";
+    private string imagePath = "Raw\\Img\\";
 
     [SerializeField]
     private Image primaryWeaponHotBar;
@@ -29,10 +28,10 @@ public class PlayerInventoryScript : MonoBehaviour
     {
         if(inventory.GetPrimaryWeapon() != null)
         {
-            primaryWeaponHotBar.GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass) inventory.GetPrimaryWeapon()).weaponIconPath));
+            primaryWeaponHotBar.GetComponent<Image>().sprite = Resources.Load<Sprite>(Path.Combine(imagePath, ((WeaponClass) inventory.GetPrimaryWeapon()).weaponIconPath));
         } else if (inventory.GetSecondaryWeapon() != null)
         {
-            secondaryWeaponHotBar.GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass)inventory.GetSecondaryWeapon()).weaponIconPath));
+            secondaryWeaponHotBar.GetComponent<Image>().sprite = Resources.Load<Sprite>(Path.Combine(imagePath, ((WeaponClass)inventory.GetSecondaryWeapon()).weaponIconPath));
         }
     }
 
@@ -42,7 +41,7 @@ public class PlayerInventoryScript : MonoBehaviour
            new Dictionary<string, Item> {
                 { 
                    "Secondary", 
-                   new WeaponClass("glock 18", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 40, startingAmmo: 40, damage: 70, 8, 8, .2f, 2f, "glock.mp3", "glock_reload.mp3", "glock.png", "glock18.prefab", 1000)
+                   new WeaponClass("glock 18", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 40, startingAmmo: 40, damage: 70, 8, 8, .2f, 2f, "glock", "glock_reload", "glock", "glock18", 1000)
                 }
            }
        );

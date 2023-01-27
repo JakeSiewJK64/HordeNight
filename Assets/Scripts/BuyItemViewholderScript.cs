@@ -1,6 +1,5 @@
 using System.IO;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,13 +16,13 @@ public class BuyItemViewholderScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemType;
 
-    private string imagePath = "Assets/Raw/Img/";
+    private string imagePath = "Raw\\Img\\";
 
     public void SetItem(Item item)
     {
         itemObject = item;
         ChangeItemName(item.name);
-        ChangeImage(AssetDatabase.LoadAssetAtPath<Sprite>(Path.Combine(imagePath, ((WeaponClass) item).weaponIconPath)));
+        ChangeImage(Resources.Load<Sprite>(Path.Combine(imagePath, ((WeaponClass) item).weaponIconPath)));
         if(item.itemType == ItemType.Weapon)
         {
             ChangeItemType(((WeaponClass) item).weaponType.ToString());
