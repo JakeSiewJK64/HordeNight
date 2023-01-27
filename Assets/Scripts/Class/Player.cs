@@ -2,6 +2,7 @@ public class Player : CharacterClass
 {
     public float stamina { get; set; }
     public bool immune { get; set; }
+    public bool dead { get; set; }
 
 
     public Player(float health, float stamina, float damage) : base(health, damage)

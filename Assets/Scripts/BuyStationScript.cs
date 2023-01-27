@@ -65,18 +65,21 @@ public class BuyStationScript : MonoBehaviour
         }
     }
 
-    private void CheckBuyStation()
+    public void CloseBuyStation()
+    {
+        buyStation.gameObject.SetActive(false);
+        mainScreen.gameObject.SetActive(true);
+        interacting = false;
+    }
+
+    public void CheckBuyStation()
     {
         if (interacting)
         {
             // todo: exit buy station
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
-            buyStation.gameObject.SetActive(false);
-            mainScreen.gameObject.SetActive(true);
-
-            interacting = false;
+            CloseBuyStation();
             return;
         }
 
