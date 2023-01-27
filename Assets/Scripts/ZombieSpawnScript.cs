@@ -57,7 +57,7 @@ public class ZombieSpawnScript : MonoBehaviour
         remainingZombies = GameObject.FindGameObjectsWithTag("Zombie").Length;
 
         zombieCounter.text = "Remaining Zombies: " + remainingZombies;
-        roundCounter.text = "Round: " + GetComponent<ZombiesKillCounterScript>().round;
+        roundCounter.text = "Round: " + GetComponent<ZombiesKillCounterScript>().GetRound();
 
         int zombiesKilled = GetComponent<ZombiesKillCounterScript>().GetZombiesKilled();
         int maxZombies = GetComponent<ZombiesKillCounterScript>().GetMaxZombies();

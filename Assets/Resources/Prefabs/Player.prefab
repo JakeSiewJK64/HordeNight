@@ -3603,11 +3603,11 @@ GameObject:
   - component: {fileID: 5913885122768181622}
   - component: {fileID: 5610828007081371552}
   - component: {fileID: 301681790956641038}
-  - component: {fileID: 1914851646993345304}
   - component: {fileID: 3200075542270543243}
   - component: {fileID: 4309184381983773489}
   - component: {fileID: 4207132647521280722}
   - component: {fileID: 8306972066309800441}
+  - component: {fileID: 62849928767836748}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3902,18 +3902,6 @@ MonoBehaviour:
   reloadSpeed: {fileID: 8713923529958258388}
   magSize: {fileID: 2740043578923954216}
   price: {fileID: 3998490130416833395}
---- !u!114 &1914851646993345304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555644347600612634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4645f06d14d03448bfe451fcd4c12b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3200075542270543243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3967,6 +3955,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaBar: {fileID: 3829819647498043316}
+--- !u!114 &62849928767836748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555644347600612634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4645f06d14d03448bfe451fcd4c12b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7905746358958019241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,8 +4436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35.399963, y: -31.49585}
-  m_SizeDelta: {x: 71.76, y: 10}
+  m_AnchoredPosition: {x: 27.95523, y: -77.30653}
+  m_SizeDelta: {x: 71.76, y: 20.5}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6587548578433118159
 CanvasRenderer:

@@ -31,9 +31,17 @@ public class BulletScript : MonoBehaviour
     {
         zombieScript =  obj.gameObject.GetComponent<ZombieScript>();
         zombieScript.zombie.health -= damage;
+        
+        if (zombieScript.zombie.health <= 0 && player)
+        {
+            player.GetComponent<ZombiesKillCounterScript>().IncrementCounter();
+            player.GetComponent<PlayerPointScript>().IncrementPoints(100);
+            Destroy(obj.gameObject);
+        }
+        
         Destroy(gameObject);
 
-        if(player)
+        if (player)
         {
             player.GetComponent<PlayerPointScript>().IncrementPoints(10);
         }

@@ -4,12 +4,8 @@ public class ZombiesKillCounterScript : MonoBehaviour
 {
     private int zombiesKilled;
     private int maxZombies;
-
-    [System.NonSerialized]
-    public int round;
-
-    [System.NonSerialized]
-    public int bloodmoon;
+    private int round;
+    private int bloodmoon;
 
     public int GetMaxZombies()
     {
@@ -22,10 +18,28 @@ public class ZombiesKillCounterScript : MonoBehaviour
         maxZombies += GetComponent<ZombiesKillCounterScript>().round * 2;
     }
 
-    private void Awake()
+    private void Start()
     {
         bloodmoon = 7;
         ChangeRound();
+    }
+
+    public int GetBloodMoon()
+    {
+        if(bloodmoon == 0)
+        {
+            return 7;
+        }
+        return bloodmoon;
+    }
+    
+    public int GetRound()
+    {
+        if(round== 0)
+        {
+            return 1;
+        }
+        return round;
     }
 
     public void IncrementCounter()

@@ -1,70 +1,37 @@
-using TMPro;
 using UnityEngine;
 
 public class ZombieScript : MonoBehaviour
 {
     public Zombie zombie;
-    private GameObject player;
+    public GameObject player;
     private Animator zombieController;
 
     [SerializeField]
     private float followRadius = 500f;
 
-    [SerializeField]
-    private TextMeshPro textMesh;
-
-    [SerializeField]
-    private bool showHealth;
-
     private void Start()
     {
-        textMesh.gameObject.SetActive(showHealth);
         zombieController = GetComponentInChildren<Animator>();
-        player = GetPlayer();
         InitializeZombie();
-    }
-
-    private void HealthCheck()
-    {
-        if (zombie.health <= 0)
-        {
-            Destroy(gameObject);
-            player.GetComponent<ZombiesKillCounterScript>().IncrementCounter();
-            player.GetComponent<PlayerPointScript>().IncrementPoints(100);
-        }
+        player = GetPlayer();
     }
 
     private void InitializeZombie()
     {
         zombie = new Zombie(
             (float)Random.Range(0.5f, 6), 
-            100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon),
-            .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().round / player.GetComponent<ZombiesKillCounterScript>().bloodmoon)
+            100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().GetRound() / player.GetComponent<ZombiesKillCounterScript>().GetBloodMoon()),
+            .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().GetRound() / player.GetComponent<ZombiesKillCounterScript>().GetBloodMoon())
         );
     }
 
     private GameObject GetPlayer()
     {
-        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (GameObject player in allPlayers)
-        {
-            if (player)
-            {
-                return player;                
-            }
-        }
-        return null;
+       return player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
-
-        textMesh.text = zombie.health.ToString();
-
-        HealthCheck();
-        player = GetPlayer();
-
         float distanceFromTarget = Vector3.Distance(transform.position, player.transform.position);
         if (distanceFromTarget <= followRadius)
         {
