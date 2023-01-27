@@ -47,6 +47,11 @@ public class ZombiesKillCounterScript : MonoBehaviour
         zombiesKilled++;
     }
 
+    public void ResetCounter()
+    {
+        zombiesKilled = 0;
+    }
+
     public int GetZombiesKilled()
     {
         return zombiesKilled;

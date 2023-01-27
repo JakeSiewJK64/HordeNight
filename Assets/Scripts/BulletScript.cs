@@ -13,7 +13,6 @@ public class BulletScript : MonoBehaviour
 
     private void Start()
     {
-        actions.Add("Zombie", HandleZombies);
         actions.Add("Environment", HandleEnvironment);
     }
 
@@ -22,29 +21,14 @@ public class BulletScript : MonoBehaviour
         this.player = player;
     }
 
+    public GameObject GetPlayer()
+    {
+        return player;
+    }
+
     private void HandleEnvironment(Collision obj)
     {
         Destroy(gameObject);
-    }
-
-    private void HandleZombies(Collision obj)
-    {
-        zombieScript =  obj.gameObject.GetComponent<ZombieScript>();
-        zombieScript.zombie.health -= damage;
-        
-        if (zombieScript.zombie.health <= 0 && player)
-        {
-            player.GetComponent<ZombiesKillCounterScript>().IncrementCounter();
-            player.GetComponent<PlayerPointScript>().IncrementPoints(100);
-            Destroy(obj.gameObject);
-        }
-        
-        Destroy(gameObject);
-
-        if (player)
-        {
-            player.GetComponent<PlayerPointScript>().IncrementPoints(10);
-        }
     }
 
     void OnCollisionEnter(Collision collision)

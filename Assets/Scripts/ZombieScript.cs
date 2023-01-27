@@ -5,6 +5,8 @@ public class ZombieScript : MonoBehaviour
     public Zombie zombie;
     public GameObject player;
     private Animator zombieController;
+    private ZombiesKillCounterScript counter;
+    private PlayerPointScript playerPoints;
 
     [SerializeField]
     private float followRadius = 500f;
@@ -42,6 +44,7 @@ public class ZombieScript : MonoBehaviour
                 2 * Time.deltaTime);
             transform.LookAt(player.transform);
         }
+        CheckHealth();
     }
 
     private void TakePlayerDamage(Collision collision)
@@ -61,6 +64,27 @@ public class ZombieScript : MonoBehaviour
                 zombieController.SetBool("Attacking", false);
             }
         } catch { }
+    }
+
+    void CheckHealth()
+    {
+        if (zombie.health <= 0)
+        {
+            counter.IncrementCounter();
+            playerPoints.IncrementPoints(100f);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            zombie.health -= collision.gameObject.GetComponent<BulletScript>().damage;
+            counter = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<ZombiesKillCounterScript>();
+            playerPoints = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerPointScript>();
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnCollisionStay(Collision collision)
