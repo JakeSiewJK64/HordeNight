@@ -8,7 +8,7 @@ public class PlayerHealthScript : MonoBehaviour
     [SerializeField]
     private Image healthbar;
     
-    float regenerationSpeed = .5f;
+    float regenerationSpeed = 5f;
     float healthbarLength = 250f;
     float healthbarHeight = 100f;
     
