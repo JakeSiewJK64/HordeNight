@@ -32,7 +32,7 @@ public class ZombieScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 targetPosition,
-                2 * Time.deltaTime);
+                zombie.speed * Time.deltaTime);
             transform.LookAt(player.transform);
         }
         CheckHealth();
@@ -72,7 +72,7 @@ public class ZombieScript : MonoBehaviour
             zombie.health -= collision.gameObject.GetComponent<BulletScript>().damage;
 
             // update zombie health bar info
-            collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(gameObject.name, zombie.health);            
+            collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(zombie.zombieType.ToString(), zombie.health);            
 
             counter = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<ZombiesKillCounterScript>();
             playerPoints = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerPointScript>();
