@@ -3650,12 +3650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 0}
-  controller: {fileID: 0}
-  playerVelocity: {x: 0, y: 0, z: 0}
-  groundedPlayer: 1
-  playerSpeed: 2
-  jumpHeight: 1
-  gravityValue: -9.81
   sprintSpeed: 2
 --- !u!114 &7555644347600612615
 MonoBehaviour:
@@ -4436,7 +4430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27.95523, y: -77.30653}
+  m_AnchoredPosition: {x: 27.9552, y: -77.30653}
   m_SizeDelta: {x: 71.76, y: 20.5}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6587548578433118159

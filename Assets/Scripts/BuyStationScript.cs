@@ -52,23 +52,16 @@ public class BuyStationScript : MonoBehaviour
 
             if(selectedItem.itemType == ItemType.Weapon)
             {
-                if(GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice &&
-                    ((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY &&
+                if (GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon() != null &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon().name == selectedItem.name ||
-                    ((WeaponClass)selectedItem).weaponHolding == WeaponHolding.SECONDARY &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon() != null &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name)
                 {
-                    // player already owns the weapon
-                    if (((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon()).reserveAmmo < (selectedItem as WeaponClass).startingAmmo ||
-                        ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon()).reserveAmmo < (selectedItem as WeaponClass).startingAmmo)
-                    {
-                        // check if reserve ammo less than starting, enable buy ammo if true
-                        buyButton.gameObject.SetActive(false);
-                        buyAmmo.gameObject.SetActive(true);
-                        return;
-                    }
+                    // check if reserve ammo less than starting, enable buy ammo if true
+                    buyButton.gameObject.SetActive(false);
+                    buyAmmo.gameObject.SetActive(true);
+                    return;
                 }
                 else
                 {
@@ -129,8 +122,30 @@ public class BuyStationScript : MonoBehaviour
     {
         globalWeaponList = new List<WeaponClass>
         {
-            new WeaponClass("glock 18", "description", ItemType.Weapon, WeaponType.Sidearm, WeaponHolding.SECONDARY, 40, startingAmmo: 40, damage: 70, 8, 8, .2f, 2f, "glock", "glock_reload", "glock", "glock18", 1000),
-            new WeaponClass("m4a1", "description", ItemType.Weapon, WeaponType.AssaultRifle, WeaponHolding.PRIMARY, reserveAmmo: 90, startingAmmo: 90 , damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, "assault_rifle/AutoGun_1p_02", "glock_reload", "m4", "glock18", 2500),
+            new WeaponClass(
+                "glock 18", 
+                "description", 
+                ItemType.Weapon, 
+                WeaponType.Sidearm, 
+                WeaponHolding.SECONDARY, 
+                40, 
+                startingAmmo: 40, 
+                damage: 70, 
+                8, 
+                8, 
+                .2f, 
+                2f, 
+                "glock",
+                "glock_reload",
+                "glock", 
+                "glock18", 
+                1000),
+            new WeaponClass(
+                "m4a1", 
+                "description", 
+                ItemType.Weapon, 
+                WeaponType.AssaultRifle, 
+                WeaponHolding.PRIMARY, reserveAmmo: 90, startingAmmo: 90 , damage: 80, 30, 30, fireRate: .1f, reloadTime: 2f, shootingSoundPath: "assault_rifle/AutoGun_1p_02", reloadingSoundPath: "glock_reload", weaponIconPath: "m4", weaponPrefabPath: "m4a1", price: 2500),
             new WeaponClass("m249", "description", ItemType.Weapon, WeaponType.LMG, WeaponHolding.PRIMARY, reserveAmmo: 300, startingAmmo: 300, damage: 85, 150, 150, fireRate: .1f, reloadTime: 10f, "assault_rifle/AutoGun_1p_02", "Miniguns_loop/Minigun_Reload_04", "m249", "m249", 6000),
             new WeaponClass("m40a3", "description", ItemType.Weapon, WeaponType.Sniper, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo: 64, damage: 100, 8, 8, fireRate: 5f, reloadTime: 10f, "m40_shoot", "rifle_reload", "m40a3", "m40a3", 5000),
             new WeaponClass("assault shotgun", "description", ItemType.Weapon, WeaponType.Shotgun, WeaponHolding.PRIMARY, reserveAmmo: 64, startingAmmo : 64, damage: 20, 8, 8, fireRate: 1f, reloadTime: 5f, "shotgun_shoot", "shotgun_reload", "assault_shotgun", "shotgun", 1500)
