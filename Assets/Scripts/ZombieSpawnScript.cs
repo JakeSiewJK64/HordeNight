@@ -50,7 +50,7 @@ public class ZombieSpawnScript : MonoBehaviour
             GameObject zombie = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
             zombie.GetComponent<ZombieScript>().zombie = new Zombie(
                 zombieType: ZombieType.Zombie,
-                speed: Random.Range(2, 8),
+                speed: Random.Range(2, 5),
                 health: 100 + 100 * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon()),
                 damage: 1
             );

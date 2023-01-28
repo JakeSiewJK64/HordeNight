@@ -17,9 +17,6 @@ public class PlayerMovementScript : MonoBehaviour
 
     public bool rolling = false;
 
-    [SerializeField]
-    private float sprintSpeed;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -114,7 +111,7 @@ public class PlayerMovementScript : MonoBehaviour
                     sprinting = false;
                 }
                 
-                controller.Move(move * Time.deltaTime * (sprinting? playerSpeed * sprintSpeed : playerSpeed));
+                controller.Move(move * Time.deltaTime * (sprinting ? playerSpeed * 2 : playerSpeed));
 
                 switch (GetComponent<BulletSpawnScript>().GetCurrentWeapon().weaponType)
                 {
