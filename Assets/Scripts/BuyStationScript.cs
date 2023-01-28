@@ -52,16 +52,19 @@ public class BuyStationScript : MonoBehaviour
 
             if(selectedItem.itemType == ItemType.Weapon)
             {
-                if(((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY &&
+                if(GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice &&
+                    ((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon() != null &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon().name == selectedItem.name ||
                     ((WeaponClass)selectedItem).weaponHolding == WeaponHolding.SECONDARY &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon() != null &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name)
                 {
-                    if(gameObject.GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice)
+                    // player already owns the weapon
+                    if (((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon()).reserveAmmo < (selectedItem as WeaponClass).startingAmmo ||
+                        ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon()).reserveAmmo < (selectedItem as WeaponClass).startingAmmo)
                     {
-                        // player already owns the weapon
+                        // check if reserve ammo less than starting, enable buy ammo if true
                         buyButton.gameObject.SetActive(false);
                         buyAmmo.gameObject.SetActive(true);
                         return;
@@ -168,7 +171,15 @@ public class BuyStationScript : MonoBehaviour
 
     public void OnBuyAmmoButton()
     {
-        ((WeaponClass)selectedItem).ResetReserveAmmo();
+        WeaponClass weapon = null;
+        if(((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY)
+        {
+            weapon = ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon());
+        } else
+        {
+            weapon = ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon());
+        }
+        weapon.reserveAmmo = weapon.startingAmmo;
         gameObject.GetComponent<PlayerPointScript>().DeductPoints(ammoPrice);
     }
 

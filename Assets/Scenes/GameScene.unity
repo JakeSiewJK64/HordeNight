@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 216680335}
-  offset: {x: 0, y: 10, z: -10}
+  offset: {x: 0, y: 20, z: -10}
 --- !u!4 &124902070
 Transform:
   m_ObjectHideFlags: 0
