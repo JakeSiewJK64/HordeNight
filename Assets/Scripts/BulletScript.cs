@@ -14,6 +14,17 @@ public class BulletScript : MonoBehaviour
     private void Start()
     {
         actions.Add("Environment", HandleEnvironment);
+        actions.Add("Zombie", HandleZombie);
+    }
+
+    private void HandleZombie(Collision obj)
+    {
+        if(obj.gameObject)
+        {
+            player.GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(
+                obj.gameObject.name, 
+                obj.gameObject.GetComponent<ZombieScript>().zombie.health);
+        }
     }
 
     public void SetOriginPlayer(GameObject player)

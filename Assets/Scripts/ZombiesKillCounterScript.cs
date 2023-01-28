@@ -21,6 +21,7 @@ public class ZombiesKillCounterScript : MonoBehaviour
     private void Start()
     {
         bloodmoon = 7;
+        round = 40;
         ChangeRound();
     }
 

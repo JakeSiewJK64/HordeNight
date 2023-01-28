@@ -5,24 +5,16 @@ public class ZombieScript : MonoBehaviour
     public Zombie zombie;
     public GameObject player;
     private Animator zombieController;
+    private float followRadius = 1000f;
+    
+    // player info
     private ZombiesKillCounterScript counter;
     private PlayerPointScript playerPoints;
-    private float followRadius = 1000f;
 
     private void Start()
     {
         zombieController = GetComponentInChildren<Animator>();
-        InitializeZombie();
         player = GetPlayer();
-    }
-
-    private void InitializeZombie()
-    {
-        zombie = new Zombie(
-            (float)Random.Range(0.5f, 6), 
-            100 + 100 * (player.GetComponent<ZombiesKillCounterScript>().GetRound() / player.GetComponent<ZombiesKillCounterScript>().GetBloodMoon()),
-            .5f + .5f * (player.GetComponent<ZombiesKillCounterScript>().GetRound() / player.GetComponent<ZombiesKillCounterScript>().GetBloodMoon())
-        );
     }
 
     private GameObject GetPlayer()
@@ -76,6 +68,10 @@ public class ZombieScript : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             zombie.health -= collision.gameObject.GetComponent<BulletScript>().damage;
+
+            // update zombie health bar info
+            collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(gameObject.name, zombie.health);
+
             counter = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<ZombiesKillCounterScript>();
             playerPoints = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerPointScript>();
             Destroy(collision.gameObject);
