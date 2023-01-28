@@ -13,6 +13,9 @@ public class PlayerMovementScript : MonoBehaviour
     private float dodgeForce = 500f;
     private float dodgeStamina = 30f;
     private float runStamina = 0.03125f;
+    private float lastSlideTime;
+
+    public bool rolling = false;
 
     [SerializeField]
     private float sprintSpeed;
@@ -24,6 +27,7 @@ public class PlayerMovementScript : MonoBehaviour
         controller.height = 0;
         animatorController = GetComponentInChildren<Animator>();
         animatorController.SetBool("Dodgerolling", false);
+        rolling = false;
     }
 
     private void SetIdleAnimation()
@@ -43,47 +47,57 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void CheckSlideAnimation()
     {
-        try
+        // check slide buffer
+        if(Time.time - lastSlideTime > 5f)
         {
-            // check if slide animation is playing
-            if (animatorController.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
-            {
-                // check if slide animation is finished
-                if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-                {
-                    // transition to running animation
-                    animatorController.Play("Idle", 0, 0.0f);
-                    GetComponent<PlayerHealthScript>().player.immune = false;
-                    GetComponent<Collider>().isTrigger = false;
-                }
-            }
+            GetComponent<PlayerHealthScript>().player.immune = false;
+            GetComponent<Collider>().isTrigger = false;
+        }
 
-            if (Input.GetKeyDown(KeyCode.Space) && 
-                GetComponent<PlayerHealthScript>().player.stamina >= dodgeStamina)
+        // check if slide animation is playing
+        if (animatorController.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
+        {
+            // check if slide animation is finished
+            if (animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                // transition to running animation
+                animatorController.Play("Idle", 0, 0.0f);        
+            }
+        }
+        else
+        {
+            rolling = false;
+
+            if (Input.GetKeyDown(KeyCode.Space) && GetComponent<PlayerHealthScript>().player.stamina >= dodgeStamina)
             {
                 GetComponent<PlayerHealthScript>().player.ReduceStamina(dodgeStamina);
                 controller.Move(transform.forward * Time.deltaTime * dodgeForce);
                 animatorController.Play("Slide", 0, 0.0f);
                 GetComponent<PlayerHealthScript>().player.immune = true;
-                    GetComponent<Collider>().isTrigger = true;
+                GetComponent<Collider>().isTrigger = true;
+                rolling = true;
+                lastSlideTime = Time.time;
             }
         }
-        catch { }
     }
 
     // Update is called once per frame
     void Update()
     {
+        bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
+        bool sprinting = false;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        
+        Vector3 forward = Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
+        Vector3 move = (forward * vertical) + (transform.right * horizontal);
+
         groundedPlayer = controller.isGrounded;
 
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
-
-        bool shiftPressed = Input.GetKey(KeyCode.LeftShift);
-        bool sprinting = false;
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         if (!GetComponent<BuyStationScript>().interacting)
         {
