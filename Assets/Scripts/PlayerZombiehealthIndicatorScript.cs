@@ -14,6 +14,9 @@ public class PlayerZombiehealthIndicatorScript : MonoBehaviour
     private float zombieHealth;
     private float lastUpdateTime;
 
+    private float healthbarLength = 353f;
+    private float healthbarHeight = 10f;
+
     private void Start()
     {
         zombieHealthTM.gameObject.SetActive(false);
@@ -28,24 +31,31 @@ public class PlayerZombiehealthIndicatorScript : MonoBehaviour
         lastUpdateTime = Time.time;
     }
 
+    public void HideUI()
+    {
+        zombieHealthTM.gameObject.SetActive(false);
+        zombieNameTM.gameObject.SetActive(false);
+        zombieHealthbar.gameObject.SetActive(false);
+        return;
+    }
+
     private void Update()
     {
         if (zombieHealth > 0 && zombieName != null)
         {
             if (Time.time - lastUpdateTime > 5f)
             {
-                zombieHealthTM.gameObject.SetActive(false);
-                zombieNameTM.gameObject.SetActive(false);
-                zombieHealthbar.gameObject.SetActive(false);
-                return;
+                HideUI();
             }
 
             zombieHealthTM.gameObject.SetActive(true);
             zombieNameTM.gameObject.SetActive(true);
             zombieHealthbar.gameObject.SetActive(true);
 
-            zombieHealthTM.text = zombieHealth.ToString() + " / " + (100 + 100 * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon()));
+            float totalHealth = (100 + 100 * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon()));
+            zombieHealthTM.text = zombieHealth.ToString() + " / " + totalHealth;
             zombieNameTM.text = zombieName;
+            zombieHealthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((zombieHealth/ totalHealth) * healthbarLength, healthbarHeight);
             return;
         }
     }

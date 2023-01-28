@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class ZombieSpawnScript : MonoBehaviour
 {
@@ -50,9 +49,9 @@ public class ZombieSpawnScript : MonoBehaviour
             spawnPos = new Vector3(spawnPad.transform.position.x, spawnPad.transform.position.y + 3, spawnPad.transform.position.z);
             GameObject zombie = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
             zombie.GetComponent<ZombieScript>().zombie = new Zombie(
-                (float)Random.Range(0.5f, 6),
-                100 + 100 * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon()),
-                .5f + .5f * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon())
+                speed: (float)Random.Range(0.5f, 10),
+                health: 100 + 100 * (GetComponent<ZombiesKillCounterScript>().GetRound() / GetComponent<ZombiesKillCounterScript>().GetBloodMoon()),
+                damage: 1
             );
             lastZombieSpawnTime = Time.time;
         }

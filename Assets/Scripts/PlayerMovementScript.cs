@@ -88,9 +88,8 @@ public class PlayerMovementScript : MonoBehaviour
         bool sprinting = false;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        
-        Vector3 forward = Quaternion.Euler(0, transform.eulerAngles.y, 0) * Vector3.forward;
-        Vector3 move = (forward * vertical) + (transform.right * horizontal);
+
+        Vector3 move = new Vector3(horizontal, 0, vertical);
 
         groundedPlayer = controller.isGrounded;
 

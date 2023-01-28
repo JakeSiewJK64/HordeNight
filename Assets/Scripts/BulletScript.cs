@@ -24,6 +24,7 @@ public class BulletScript : MonoBehaviour
             player.GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(
                 obj.gameObject.name, 
                 obj.gameObject.GetComponent<ZombieScript>().zombie.health);
+            player.GetComponent<PlayerPointScript>().IncrementPoints(10);
         }
     }
 

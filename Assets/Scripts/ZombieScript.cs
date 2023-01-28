@@ -10,6 +10,7 @@ public class ZombieScript : MonoBehaviour
     // player info
     private ZombiesKillCounterScript counter;
     private PlayerPointScript playerPoints;
+    private PlayerZombiehealthIndicatorScript indicator;
 
     private void Start()
     {
@@ -59,6 +60,7 @@ public class ZombieScript : MonoBehaviour
         {
             counter.IncrementCounter();
             playerPoints.IncrementPoints(100f);
+            indicator.HideUI();
             Destroy(gameObject);
         }
     }
@@ -70,10 +72,11 @@ public class ZombieScript : MonoBehaviour
             zombie.health -= collision.gameObject.GetComponent<BulletScript>().damage;
 
             // update zombie health bar info
-            collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(gameObject.name, zombie.health);
+            collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>().SetZombie(gameObject.name, zombie.health);            
 
             counter = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<ZombiesKillCounterScript>();
             playerPoints = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerPointScript>();
+            indicator = collision.gameObject.GetComponent<BulletScript>().GetPlayer().GetComponent<PlayerZombiehealthIndicatorScript>();
             Destroy(collision.gameObject);
         }
     }
