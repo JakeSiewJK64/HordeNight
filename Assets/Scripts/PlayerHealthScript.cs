@@ -8,14 +8,13 @@ public class PlayerHealthScript : MonoBehaviour
     [SerializeField]
     private Image healthbar;
     
-    float regenerationSpeed = 5f;
     float healthbarLength = 250f;
     float healthbarHeight = 100f;
     
     // Start is called before the first frame update
     void Start()
     {
-        player = new Player(100, 100 , 5);
+        player = new Player(100, 100 , 5, 3f);
     }
 
 
@@ -27,7 +26,7 @@ public class PlayerHealthScript : MonoBehaviour
             {
                 ProcessDeath();
             }
-            GetComponent<PlayerHealthScript>().player.GainHealth(Time.deltaTime * regenerationSpeed);
+            GetComponent<PlayerHealthScript>().player.GainHealth(Time.deltaTime * player.healthRegeneration);
         } 
 
         healthbar.GetComponent<RectTransform>().sizeDelta = new Vector2((GetComponent<PlayerHealthScript>().player.health / 100) * healthbarLength, healthbarHeight);

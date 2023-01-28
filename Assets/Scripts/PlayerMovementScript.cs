@@ -5,14 +5,14 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField]
     private Animator animatorController;
 
-    public CharacterController controller;
-    public Vector3 playerVelocity;
-    public bool groundedPlayer = true;
-    public float playerSpeed = 2.0f;
-    public float jumpHeight = 1.0f;
-    public float gravityValue = -9.81f;
-    private float dodgeForce = 1000f;
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer = true;
+    private float playerSpeed = 2.0f;
+    private float gravityValue = -9.81f;
+    private float dodgeForce = 500f;
     private float dodgeStamina = 30f;
+    private float runStamina = 0.03125f;
 
     [SerializeField]
     private float sprintSpeed;
@@ -93,9 +93,9 @@ public class PlayerMovementScript : MonoBehaviour
                 animatorController.SetBool("RifleIdle", false);
                 
                 
-                if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > .5f)
+                if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > runStamina)
                 {
-                    GetComponent<PlayerHealthScript>().player.ReduceStamina(.5f);
+                    GetComponent<PlayerHealthScript>().player.ReduceStamina(runStamina);
                     sprinting = true;
                 }  else
                 {
