@@ -11,8 +11,8 @@ public class PlayerMovementScript : MonoBehaviour
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
-    private float dodgeForce = 50f;
-    private float dodgeStamina = 20f;
+    private float dodgeForce = 1000f;
+    private float dodgeStamina = 30f;
 
     [SerializeField]
     private float sprintSpeed;
@@ -59,7 +59,6 @@ public class PlayerMovementScript : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && 
-                Input.GetKey(KeyCode.LeftShift) &&                 
                 GetComponent<PlayerHealthScript>().player.stamina >= dodgeStamina)
             {
                 GetComponent<PlayerHealthScript>().player.ReduceStamina(dodgeStamina);

@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public Transform target;
-    public float distance = 10f;
-    public float height = 8f;
-    public float heightDamping = 2f;
-    public float rotationDamping = 3f;
+    [SerializeField]
+    private Transform target;
+    
+    [SerializeField]
+    private Vector3 offset;
+    
+    private float smoothTime = .3f;
+    private Vector3 velocity = Vector3.zero;
 
     private void Start()
     {
@@ -16,16 +19,13 @@ public class CameraScript : MonoBehaviour
 
     void Update ()
     {
-        float wantedHeight = target.position.y + height;
-        float currentRotationAngle = transform.eulerAngles.y;
-        float currentHeight = transform.position.y;
-
-        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
-
-        Quaternion currentRotation = Quaternion.Euler(0f, currentRotationAngle, 0f);
-        transform.position = target.position;
-        transform.position -= currentRotation * Vector3.forward * distance;
-        transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-        transform.LookAt(target);
+        if(target)
+        {
+            Vector3 targetPos = target.position + offset;
+            transform.position = Vector3.SmoothDamp(
+                transform.position, 
+                targetPos, 
+                ref velocity, smoothTime);
+        }
     }
 }
