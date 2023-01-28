@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerRotationScript : MonoBehaviour
 {
-    public float sensitivity = 100f;
+    [SerializeField]
+    private float sensitivity = 50f;
 
     void Update()
     {

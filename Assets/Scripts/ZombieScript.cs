@@ -7,9 +7,7 @@ public class ZombieScript : MonoBehaviour
     private Animator zombieController;
     private ZombiesKillCounterScript counter;
     private PlayerPointScript playerPoints;
-
-    [SerializeField]
-    private float followRadius = 500f;
+    private float followRadius = 1000f;
 
     private void Start()
     {
@@ -54,11 +52,8 @@ public class ZombieScript : MonoBehaviour
             if (collision.gameObject.tag == "Player" && collision != null && gameObject != null)
             {
                 zombieController.SetBool("Attacking", true);
-                if (collision.gameObject.GetComponent<PlayerHealthScript>().player.health > 0)
-                {
-                    collision.gameObject.GetComponent<PlayerHealthScript>().player.TakeDamage(zombie.damage);
-                    return;
-                }
+                collision.gameObject.GetComponent<PlayerHealthScript>().TakeDamage(zombie.damage);
+                return;
             } else
             {
                 zombieController.SetBool("Attacking", false);

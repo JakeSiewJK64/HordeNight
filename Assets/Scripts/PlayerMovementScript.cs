@@ -8,11 +8,11 @@ public class PlayerMovementScript : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer = true;
-    private float playerSpeed = 2.0f;
     private float gravityValue = -9.81f;
-    private float dodgeForce = 500f;
+    private float playerSpeed = 2.0f;
+    private float runStamina = 0.25f;
+    private float dodgeForce = 200f;
     private float dodgeStamina = 30f;
-    private float runStamina = 0.03125f;
     private float lastSlideTime;
 
     public bool rolling = false;
@@ -106,8 +106,7 @@ public class PlayerMovementScript : MonoBehaviour
                 animatorController.SetBool("PistolIdle", false);
                 animatorController.SetBool("RifleIdle", false);
                 
-                
-                if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > runStamina)
+                if(shiftPressed && GetComponent<PlayerHealthScript>().player.stamina > 0)
                 {
                     GetComponent<PlayerHealthScript>().player.ReduceStamina(runStamina);
                     sprinting = true;
