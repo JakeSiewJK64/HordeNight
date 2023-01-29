@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -5,12 +6,14 @@ using UnityEngine;
 public class UpgradeDescViewholder : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI upgradeName, nextLevel, value, cost;
+    private TextMeshProUGUI upgradeNameTM, nextLevelTM, valueTM, costTM;
     
     [SerializeField]
     private GameObject player;
-    
+
     private string audioPath = "Raw\\Sound\\SoundEffects\\menuSelect";
+
+    private UpgradeModule module;
 
     private void PlaySelectSound()
     {
@@ -20,13 +23,32 @@ public class UpgradeDescViewholder : MonoBehaviour
     public void OnViewholderClick()
     {
         PlaySelectSound();
+        module.Upgrade();
+        SetUpgradeModule(module);
+        player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
     }
 
-    public void UpdateDescription(string upgradeName, int nextLevel, float value, float cost)
+    public void SetUpgradeModule(UpgradeModule module)
     {
-        this.upgradeName.text = upgradeName;
-        this.nextLevel.text = ">>> Level " + nextLevel.ToString();
-        this.value.text = value + (value * .25f) + "%";
-        this.cost.text = cost.ToString() + " pts";
+        this.module = module;
+        UpdateDescription(nextLevel: module.GetLevel() + 1,
+            value: module.value += (module.value * .25f),
+            cost: module.cost *= 2
+        );
+    }
+
+    public void UpdateUpgradeName(string name)
+    {
+        if(!string.IsNullOrEmpty(name))
+        {
+            upgradeNameTM.text = name;
+        }
+    }
+
+    private void UpdateDescription(int nextLevel, float value, float cost)
+    {
+        nextLevelTM.text = ">>> Level " + nextLevel.ToString();
+        valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
+        costTM.text = cost.ToString() + " pts";
     }
 }

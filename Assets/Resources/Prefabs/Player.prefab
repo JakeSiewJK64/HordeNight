@@ -1627,10 +1627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: {fileID: 2417941950235095623}
-  nextLevel: {fileID: 4482332293011070686}
-  value: {fileID: 4513384131367268171}
-  cost: {fileID: 5397080563437672816}
+  upgradeNameTM: {fileID: 2417941950235095623}
+  nextLevelTM: {fileID: 4482332293011070686}
+  valueTM: {fileID: 4513384131367268171}
+  costTM: {fileID: 5397080563437672816}
   player: {fileID: 7555644347600612634}
 --- !u!1 &1576047195463741134
 GameObject:
@@ -4267,10 +4267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: {fileID: 6207636429521922937}
-  nextLevel: {fileID: 1545352105787890396}
-  value: {fileID: 945774297285495986}
-  cost: {fileID: 2613607626442950566}
+  upgradeNameTM: {fileID: 6207636429521922937}
+  nextLevelTM: {fileID: 1545352105787890396}
+  valueTM: {fileID: 945774297285495986}
+  costTM: {fileID: 2613607626442950566}
   player: {fileID: 7555644347600612634}
 --- !u!1 &4532582144123568346
 GameObject:
@@ -6772,10 +6772,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: {fileID: 1024297648207365524}
-  nextLevel: {fileID: 4154590785411195575}
-  value: {fileID: 2946823063905280690}
-  cost: {fileID: 1884025697973630893}
+  upgradeNameTM: {fileID: 1024297648207365524}
+  nextLevelTM: {fileID: 4154590785411195575}
+  valueTM: {fileID: 2946823063905280690}
+  costTM: {fileID: 1884025697973630893}
   player: {fileID: 7555644347600612634}
 --- !u!1 &7160573736645182223
 GameObject:
@@ -8041,10 +8041,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: {fileID: 7109026572446618555}
-  nextLevel: {fileID: 3112736378873927513}
-  value: {fileID: 5584853097167137357}
-  cost: {fileID: 8286763356789530126}
+  upgradeNameTM: {fileID: 7109026572446618555}
+  nextLevelTM: {fileID: 3112736378873927513}
+  valueTM: {fileID: 5584853097167137357}
+  costTM: {fileID: 8286763356789530126}
   player: {fileID: 7555644347600612634}
 --- !u!1 &8117748216027961758
 GameObject:

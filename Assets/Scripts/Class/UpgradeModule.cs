@@ -10,21 +10,13 @@ public class UpgradeModule
         cost = 500;
     }  
 
-    public void IncrementLevel()
+    public void Upgrade()
     {
         level++;
-    }
-
-    public void IncrementCost()
-    {
+        value += value * .25f;
         cost *= 2;
     }
-
-    public void SetValue(float value)
-    {
-        this.value = value;
-    }
-
+ 
     public int GetLevel() { return level; }
     public int GetCost () { return level; }
 

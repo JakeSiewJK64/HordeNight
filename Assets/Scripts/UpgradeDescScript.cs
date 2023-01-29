@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class UpgradeDescScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject firepower, reloadspeed, capacity, firerate;
+
     class UpgradeItem
     {
         public string name;
@@ -15,9 +18,6 @@ public class UpgradeDescScript : MonoBehaviour
             this.module = module;
         }
     }
-
-    [SerializeField]
-    private GameObject firepower, reloadspeed, capacity, firerate;
 
     public void UpdateViewholder(WeaponClass item)
     {
@@ -32,12 +32,8 @@ public class UpgradeDescScript : MonoBehaviour
         {
             if (upgradeItem.viewholder.TryGetComponent(out UpgradeDescViewholder viewholderItem))
             {
-                viewholderItem.UpdateDescription(
-                    upgradeName: upgradeItem.name.ToString(),
-                    nextLevel: upgradeItem.module.GetLevel() + 1,
-                    value: upgradeItem.module.value += (upgradeItem.module.value * .25f),
-                    cost: upgradeItem.module.cost *= 2
-                );
+                viewholderItem.UpdateUpgradeName(name: upgradeItem.name);
+                viewholderItem.SetUpgradeModule(module: upgradeItem.module);
             }
         }
     }
