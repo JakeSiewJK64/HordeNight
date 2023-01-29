@@ -5,6 +5,11 @@ public class BuyStationNavScript : MonoBehaviour
     [SerializeField]
     private GameObject shop, upgrade, shopButton, upgradeButton;
 
+    private void Start()
+    {
+        OnShopButtonClick();
+    }
+
     public void OnShopButtonClick()
     {
         shop.SetActive(true);

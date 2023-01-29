@@ -122,7 +122,7 @@ public class BulletSpawnScript : MonoBehaviour
                 lastClickTime = Time.time;
 
                 bulletPrefab.GetComponent<BulletScript>().damage = 
-                    (float)(currentWeapon.damage + ((int) currentWeapon.weaponType * currentWeapon.upgradeStats.damage.GetValue()));
+                    (float)(currentWeapon.damage + (currentWeapon.damage * (int) currentWeapon.weaponType * currentWeapon.upgradeStats.damage.GetValue()));
 
                 // play shoot sound
                 playWeaponSound(shootingSound);
