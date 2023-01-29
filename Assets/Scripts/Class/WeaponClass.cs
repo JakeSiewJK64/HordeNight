@@ -1,3 +1,5 @@
+using System;
+
 public class WeaponClass : Item
 {
     public WeaponType weaponType;
@@ -56,9 +58,10 @@ public class WeaponClass : Item
         reserveAmmo = startingAmmo;
     }
 
-    public float GetMagazineSize()
+    public int GetMagazineSize()
     {
-        return magazineSize + (int)(currentBullets * upgradeStats.capacity.GetValue());
+        return upgradeStats.capacity.GetLevel() > 1 ? 
+            (int)(magazineSize + (int) weaponType * Math.Ceiling(upgradeStats.capacity.GetValue())) : (int) magazineSize;
     }
 
     public void Reload()

@@ -20,14 +20,14 @@ public class UpgradeModule
     public void Reset()
     {
         level = 1;
-        value = 0;
+        value = 1;
         cost = 500;
     }
 
     public void Upgrade()
     {
         level++;
-        value++;
+        value += value * .5f;
         cost *= 2;
     }
  
