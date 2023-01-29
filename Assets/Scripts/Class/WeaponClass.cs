@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 public class WeaponClass : Item
 {
     public WeaponType weaponType;
@@ -55,23 +53,28 @@ public class WeaponClass : Item
 
     public void ResetReserveAmmo()
     {
-        this.reserveAmmo = this.startingAmmo;
+        reserveAmmo = startingAmmo;
+    }
+
+    public float GetMagazineSize()
+    {
+        return magazineSize + (int)(currentBullets * upgradeStats.capacity.GetValue());
     }
 
     public void Reload()
     {
         if(reserveAmmo > 0)
         {
-            if(reserveAmmo > magazineSize)
+            if(reserveAmmo > GetMagazineSize())
             {
                 if (currentBullets > 0)
                 {
-                    reserveAmmo -= magazineSize - currentBullets;
-                    currentBullets = magazineSize;
+                    reserveAmmo -= GetMagazineSize() - currentBullets;
+                    currentBullets = GetMagazineSize();
                     return;
                 }
-                currentBullets = magazineSize;
-                reserveAmmo -= magazineSize;
+                currentBullets = GetMagazineSize();
+                reserveAmmo -= GetMagazineSize();
             } else
             {
                 currentBullets = reserveAmmo;

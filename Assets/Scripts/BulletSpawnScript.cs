@@ -78,7 +78,7 @@ public class BulletSpawnScript : MonoBehaviour
 
     private void checkReloading()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !reloading && currentWeapon.currentBullets != currentWeapon.magazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && currentWeapon.currentBullets != currentWeapon.GetMagazineSize())
         {
             Reload();
         }
@@ -122,7 +122,7 @@ public class BulletSpawnScript : MonoBehaviour
                 lastClickTime = Time.time;
 
                 bulletPrefab.GetComponent<BulletScript>().damage = 
-                    (float)(currentWeapon.damage * ((int) currentWeapon.weaponType * currentWeapon.upgradeStats.damage.GetValue()));
+                    (float)(currentWeapon.damage + ((int) currentWeapon.weaponType * currentWeapon.upgradeStats.damage.GetValue()));
 
                 // play shoot sound
                 playWeaponSound(shootingSound);

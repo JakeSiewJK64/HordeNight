@@ -27,7 +27,7 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     public void OnViewholderClick()
     {
-        if(player.GetComponent<PlayerPointScript>().GetPoints() >= module.GetCost() * 2)
+        if(player.GetComponent<PlayerPointScript>().GetPoints() >= module.GetCost() * 2 && module.GetLevel() < module.GetMaxLevel())
         {
             insufficientPointsTM.gameObject.SetActive(false);
             PlaySelectSound();
@@ -61,9 +61,19 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     private void UpdateDescription(int nextLevel, double value, float cost)
     {
-        nextLevelTM.text = ">>> Level " + nextLevel.ToString();
-        valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
-        costTM.text = cost.ToString() + " pts";
-        insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
+        if (nextLevel > module.GetMaxLevel())
+        {
+            nextLevelTM.text = "Max";
+            valueTM.text = "";
+            costTM.text = "";
+            insufficientPointsTM.gameObject.SetActive(false);
+        }
+        else
+        {
+            nextLevelTM.text = ">>> Level " + nextLevel.ToString();
+            valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
+            costTM.text = cost.ToString() + " pts";
+            insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
+        }
     }
 }

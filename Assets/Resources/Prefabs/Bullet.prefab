@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8074845926922266155}
-  m_LocalRotation: {x: -0, y: -0, z: 0.70613486, w: 0.7080775}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7061373, w: 0.7080749}
   m_LocalPosition: {x: 0.255, y: 1.529, z: -3.811}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
@@ -128,5 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  player: {fileID: 7555644347600612634, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
   zombieScript: {fileID: 0}
