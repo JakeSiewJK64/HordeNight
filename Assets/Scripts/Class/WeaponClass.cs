@@ -61,7 +61,7 @@ public class WeaponClass : Item
     public int GetMagazineSize()
     {
         return upgradeStats.capacity.GetLevel() > 1 ? 
-            (int)(magazineSize + (int) weaponType * Math.Ceiling(upgradeStats.capacity.GetValue())) : (int) magazineSize;
+            (int)(magazineSize + (int) weaponType * Math.Ceiling(upgradeStats.capacity.GetValue())) + upgradeStats.capacity.GetLevel(): (int) magazineSize;
     }
 
     public void Reload()
