@@ -26,14 +26,15 @@ public class UpgradeDescViewholder : MonoBehaviour
         module.Upgrade();
         SetUpgradeModule(module);
         player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
+        player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
     }
 
     public void SetUpgradeModule(UpgradeModule module)
     {
         this.module = module;
         UpdateDescription(nextLevel: module.GetLevel() + 1,
-            value: module.value + (module.value * .25f),
-            cost: module.cost * 2
+            value: module.GetValue() + (module.GetValue() * .25f),
+            cost: module.GetCost() * 2
         );
     }
 
@@ -45,7 +46,7 @@ public class UpgradeDescViewholder : MonoBehaviour
         }
     }
 
-    private void UpdateDescription(int nextLevel, float value, float cost)
+    private void UpdateDescription(int nextLevel, double value, float cost)
     {
         nextLevelTM.text = ">>> Level " + nextLevel.ToString();
         valueTM.text = Math.Round(value + (value * .25f), 2) + "%";

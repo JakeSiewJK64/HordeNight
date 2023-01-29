@@ -2,15 +2,20 @@ using System;
 
 public class UpgradeModule
 {
-    public int level { get; set; }
-    public float value { get; set; }
-    public float cost { get; set; }
+    private int level { get; set; }
+    private float value { get; set; }
+    private float cost { get; set; }
 
     public UpgradeModule() {
+        Reset();
+    }  
+
+    public void Reset()
+    {
         level = 1;
         value = 1;
         cost = 500;
-    }  
+    }
 
     public void Upgrade()
     {

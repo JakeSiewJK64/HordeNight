@@ -179,6 +179,7 @@ public class BuyStationScript : MonoBehaviour
         }
         
         ((WeaponClass)selectedItem).ResetReserveAmmo();
+        ((WeaponClass)selectedItem).upgradeStats.ResetUpgrades();
 
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
         gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);

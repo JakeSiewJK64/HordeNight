@@ -12,4 +12,12 @@ public class UpgradeStats
         fireRate = new UpgradeModule();
         reloadSpeed = new UpgradeModule();
     }
+
+    public void ResetUpgrades()
+    {
+        damage.Reset();
+        capacity.Reset();
+        fireRate.Reset();
+        reloadSpeed.Reset();
+    }
 }

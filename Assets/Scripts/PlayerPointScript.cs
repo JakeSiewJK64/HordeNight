@@ -10,7 +10,7 @@ public class PlayerPointScript : MonoBehaviour
 
     void Start()
     {
-        points = 115000000;
+        points = 115000;
     }
 
     private void Update()
