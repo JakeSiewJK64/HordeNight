@@ -17,10 +17,16 @@ public class UpgradeStationScript : MonoBehaviour
         upgradeDesc.SetActive(false);
         UpdateUpgradeItems();
     }
-
     public void UpdateUpgradeItems()
     {
-        scrollArea.content.DetachChildren();
+        foreach(Transform child in scrollArea.content)
+        {
+            if(child != null)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         foreach (WeaponClass item in GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetAllWeaponsFromInventory())
         {
             GameObject newItem = Instantiate(viewholder, scrollArea.content);

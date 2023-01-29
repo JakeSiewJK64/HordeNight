@@ -32,8 +32,8 @@ public class UpgradeDescViewholder : MonoBehaviour
     {
         this.module = module;
         UpdateDescription(nextLevel: module.GetLevel() + 1,
-            value: module.value += (module.value * .25f),
-            cost: module.cost *= 2
+            value: module.value + (module.value * .25f),
+            cost: module.cost * 2
         );
     }
 

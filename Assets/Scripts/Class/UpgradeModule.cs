@@ -1,3 +1,5 @@
+using System;
+
 public class UpgradeModule
 {
     public int level { get; set; }
@@ -18,7 +20,7 @@ public class UpgradeModule
     }
  
     public int GetLevel() { return level; }
-    public int GetCost () { return level; }
+    public float GetCost () { return cost; }
 
-    public float GetValue() { return value; }
+    public double GetValue() { return Math.Round(value, 2); }
 }
