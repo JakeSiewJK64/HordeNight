@@ -94,6 +94,7 @@ public class BuyStationScript : MonoBehaviour
     {
         buyStation.gameObject.SetActive(false);
         mainScreen.gameObject.SetActive(true);
+        GetComponent<UpgradeStationScript>().HideDesc();
         interacting = false;
     }
 

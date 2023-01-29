@@ -17,6 +17,7 @@ public class UpgradeStationScript : MonoBehaviour
         upgradeDesc.SetActive(false);
         UpdateUpgradeItems();
     }
+
     public void UpdateUpgradeItems()
     {
         foreach(Transform child in scrollArea.content)
@@ -41,6 +42,11 @@ public class UpgradeStationScript : MonoBehaviour
     {
         upgradeDesc.SetActive(true);
         gameObject.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath)));
+    }
+
+    public void HideDesc()
+    {
+        upgradeDesc.SetActive(false);
     }
 
     public void UpdateDescriptionPanel(WeaponClass itemObject)
