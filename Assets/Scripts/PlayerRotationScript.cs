@@ -6,7 +6,7 @@ public class PlayerRotationScript : MonoBehaviour
 
     void Update()
     {
-        if (!GetComponent<PlayerMovementScript>().rolling)
+        if (!GetComponent<PlayerMovementScript>().rolling && !GetComponent<BuyStationScript>().interacting)
         {
             float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
             transform.Rotate(0f, mouseX, 0f);

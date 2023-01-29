@@ -32,18 +32,19 @@ public class UpgradeDescViewholder : MonoBehaviour
             insufficientPointsTM.gameObject.SetActive(false);
             PlaySelectSound();
             module.Upgrade();
-            SetUpgradeModule(module);
             player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
             player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
         } else
         {
             insufficientPointsTM.gameObject.SetActive(true);
         }
+        SetUpgradeModule(module);
     }
 
     public void SetUpgradeModule(UpgradeModule module)
     {
         this.module = module;
+        insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
         UpdateDescription(nextLevel: module.GetLevel() + 1,
             value: module.GetValue() + (module.GetValue() * .25f),
             cost: module.GetCost() * 2
@@ -63,6 +64,6 @@ public class UpgradeDescViewholder : MonoBehaviour
         nextLevelTM.text = ">>> Level " + nextLevel.ToString();
         valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
         costTM.text = cost.ToString() + " pts";
-        
+        insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
     }
 }

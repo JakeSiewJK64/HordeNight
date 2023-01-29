@@ -28,12 +28,4 @@ public class CameraScript : MonoBehaviour
                 ref velocity, smoothTime);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Environment")
-        {
-            Debug.Log("hit envir");
-        }
-    }
 }
