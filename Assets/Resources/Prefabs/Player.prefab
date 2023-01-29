@@ -1489,6 +1489,7 @@ GameObject:
   - component: {fileID: 2589696042796066199}
   - component: {fileID: 1883146521543334616}
   - component: {fileID: 8678329347970705107}
+  - component: {fileID: 4677137880318751755}
   m_Layer: 5
   m_Name: Firepower
   m_TagString: Untagged
@@ -1601,7 +1602,36 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1883146521543334616}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4677137880318751755}
+        m_TargetAssemblyTypeName: UpgradeDescViewholder, Assembly-CSharp
+        m_MethodName: OnViewholderClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4677137880318751755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398135925868149686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: {fileID: 2417941950235095623}
+  nextLevel: {fileID: 4482332293011070686}
+  value: {fileID: 4513384131367268171}
+  cost: {fileID: 5397080563437672816}
+  player: {fileID: 7555644347600612634}
 --- !u!1 &1576047195463741134
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,6 +4129,7 @@ GameObject:
   - component: {fileID: 4624856665892254122}
   - component: {fileID: 786443508193491870}
   - component: {fileID: 93298256795568959}
+  - component: {fileID: 5486232379154950088}
   m_Layer: 5
   m_Name: Capacity
   m_TagString: Untagged
@@ -4211,7 +4242,36 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 786443508193491870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5486232379154950088}
+        m_TargetAssemblyTypeName: UpgradeDescViewholder, Assembly-CSharp
+        m_MethodName: OnViewholderClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5486232379154950088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529849662869818377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: {fileID: 6207636429521922937}
+  nextLevel: {fileID: 1545352105787890396}
+  value: {fileID: 945774297285495986}
+  cost: {fileID: 2613607626442950566}
+  player: {fileID: 7555644347600612634}
 --- !u!1 &4532582144123568346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,6 +6634,7 @@ GameObject:
   - component: {fileID: 3398923147127057711}
   - component: {fileID: 1955563885769279475}
   - component: {fileID: 6048466484151082539}
+  - component: {fileID: 7572945235206465834}
   m_Layer: 5
   m_Name: Firerate
   m_TagString: Untagged
@@ -6686,7 +6747,36 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1955563885769279475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7572945235206465834}
+        m_TargetAssemblyTypeName: UpgradeDescViewholder, Assembly-CSharp
+        m_MethodName: OnViewholderClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7572945235206465834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130435051248414087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: {fileID: 1024297648207365524}
+  nextLevel: {fileID: 4154590785411195575}
+  value: {fileID: 2946823063905280690}
+  cost: {fileID: 1884025697973630893}
+  player: {fileID: 7555644347600612634}
 --- !u!1 &7160573736645182223
 GameObject:
   m_ObjectHideFlags: 0
@@ -7076,6 +7166,7 @@ GameObject:
   - component: {fileID: 3055389492996823588}
   - component: {fileID: 9089108280479699702}
   - component: {fileID: 550476387801001971}
+  - component: {fileID: 5259488447246467503}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7458,6 +7549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollArea: {fileID: 6561413143904208386}
   viewholder: {fileID: 5040226222555441479, guid: 5520f37e7cfd5c2438aab53a5107a56f, type: 3}
+  upgradeDesc: {fileID: 6055809315476217803}
 --- !u!114 &550476387801001971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7474,6 +7566,22 @@ MonoBehaviour:
   upgrade: {fileID: 1033759101908433824}
   shopButton: {fileID: 6422067125597964333}
   upgradeButton: {fileID: 2447973374119527448}
+--- !u!114 &5259488447246467503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555644347600612634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfafba90a8396d4aaa1fe6f4cf19454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepower: {fileID: 1398135925868149686}
+  reloadspeed: {fileID: 8003209114602311785}
+  capacity: {fileID: 4529849662869818377}
+  firerate: {fileID: 7130435051248414087}
 --- !u!1 &7588192594148701889
 GameObject:
   m_ObjectHideFlags: 0
@@ -7795,6 +7903,7 @@ GameObject:
   - component: {fileID: 3477663714581803904}
   - component: {fileID: 7446590632738513527}
   - component: {fileID: 8267932558754254780}
+  - component: {fileID: 2770755657161885266}
   m_Layer: 5
   m_Name: Reloadspeed
   m_TagString: Untagged
@@ -7907,7 +8016,36 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7446590632738513527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2770755657161885266}
+        m_TargetAssemblyTypeName: UpgradeDescViewholder, Assembly-CSharp
+        m_MethodName: OnViewholderClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2770755657161885266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8003209114602311785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019376fcb8f5b7d4691a0259faad7a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: {fileID: 7109026572446618555}
+  nextLevel: {fileID: 3112736378873927513}
+  value: {fileID: 5584853097167137357}
+  cost: {fileID: 8286763356789530126}
+  player: {fileID: 7555644347600612634}
 --- !u!1 &8117748216027961758
 GameObject:
   m_ObjectHideFlags: 0

@@ -183,7 +183,7 @@ public class BuyStationScript : MonoBehaviour
         gameObject.GetComponent<PlayerInventoryScript>().UpdateWeaponHotbarSprites();
         gameObject.GetComponent<BulletSpawnScript>().ChangeWeapon((WeaponClass)selectedItem);
         gameObject.GetComponent<PlayerPointScript>().DeductPoints(selectedItem.price);
-        gameObject.GetComponent<PlayerWeaponUpgradeScript>().UpdateUpgradeItems();
+        gameObject.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
         
         selectedItem.price *= 2;
     }

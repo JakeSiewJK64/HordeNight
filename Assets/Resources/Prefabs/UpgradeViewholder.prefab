@@ -349,8 +349,8 @@ GameObject:
   - component: {fileID: 2134143477075702020}
   - component: {fileID: 8961410216629240642}
   - component: {fileID: 1699591227234722778}
-  - component: {fileID: -3643835279136959494}
   - component: {fileID: 8487772165199102197}
+  - component: {fileID: 6914267419105797608}
   m_Layer: 5
   m_Name: UpgradeViewholder
   m_TagString: Untagged
@@ -431,21 +431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &-3643835279136959494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040226222555441479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0306f36ded65f654795e5e80be7a08e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 1343610560119660993}
-  itemName: {fileID: 1337715785604596462}
-  itemType: {fileID: 2489441574090396243}
 --- !u!114 &8487772165199102197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,8 +475,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3643835279136959494}
-        m_TargetAssemblyTypeName: BuyItemViewholderScript, Assembly-CSharp
+      - m_Target: {fileID: 6914267419105797608}
+        m_TargetAssemblyTypeName: UpgradeItemViewholder, Assembly-CSharp
         m_MethodName: OnMouseClick
         m_Mode: 1
         m_Arguments:
@@ -502,6 +487,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6914267419105797608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040226222555441479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f280f1c7651d5a4581c61cafd272b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemProfile: {fileID: 1343610560119660993}
+  damage: {fileID: 1337715785604596462}
+  reloadSpeed: {fileID: 2489441574090396243}
+  fireRate: {fileID: 4248270228624522129}
+  capacity: {fileID: 6661303339255329308}
 --- !u!1 &5228940017838361855
 GameObject:
   m_ObjectHideFlags: 0

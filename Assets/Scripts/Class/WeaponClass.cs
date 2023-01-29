@@ -15,6 +15,7 @@ public class WeaponClass : Item
     public string reloadingSoundPath;
     public string weaponIconPath;
     public string weaponPrefabPath;
+    public UpgradeStats upgradeStats;
 
     public WeaponClass(
         string name, 
@@ -35,6 +36,7 @@ public class WeaponClass : Item
         string weaponPrefabPath, 
         float price) : base(name, description, itemType, price)
     {
+        upgradeStats = new UpgradeStats();
         this.weaponType = weaponType;
         this.startingAmmo = startingAmmo;
         this.weaponHolding = weaponHolding;
