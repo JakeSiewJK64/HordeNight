@@ -83,7 +83,7 @@ public class BulletSpawnScript : MonoBehaviour
             Reload();
         }
 
-        if (Time.time - lastClickTime > currentWeapon.reloadTime)
+        if (Time.time - lastClickTime > currentWeapon.reloadTime - (currentWeapon.reloadTime * (currentWeapon.upgradeStats.reloadSpeed.GetValue() / 100)))
         {
             reloading = false;
         }
@@ -116,12 +116,13 @@ public class BulletSpawnScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && !reloading)
         {
-            if (Time.time - lastClickTime > currentWeapon.fireRate)
+            if (Time.time - lastClickTime > currentWeapon.fireRate - (currentWeapon.upgradeStats.fireRate.GetValue() / 100) * currentWeapon.fireRate)
             {
                 currentWeapon.currentBullets--;
                 lastClickTime = Time.time;
 
-                bulletPrefab.GetComponent<BulletScript>().damage = currentWeapon.damage * (float)currentWeapon.weaponType;
+                bulletPrefab.GetComponent<BulletScript>().damage = 
+                    (float)(currentWeapon.damage * ((int) currentWeapon.weaponType * currentWeapon.upgradeStats.damage.GetValue()));
 
                 // play shoot sound
                 playWeaponSound(shootingSound);

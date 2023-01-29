@@ -6,7 +6,7 @@ using UnityEngine;
 public class UpgradeDescViewholder : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI upgradeNameTM, nextLevelTM, valueTM, costTM;
+    private TextMeshProUGUI upgradeNameTM, nextLevelTM, valueTM, costTM, insufficientPointsTM;
     
     [SerializeField]
     private GameObject player;
@@ -15,6 +15,11 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     private UpgradeModule module;
 
+    private void Start()
+    {
+        insufficientPointsTM.gameObject.SetActive(false);
+    }
+
     private void PlaySelectSound()
     {
         player.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath)));
@@ -22,11 +27,18 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     public void OnViewholderClick()
     {
-        PlaySelectSound();
-        module.Upgrade();
-        SetUpgradeModule(module);
-        player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
-        player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
+        if(player.GetComponent<PlayerPointScript>().GetPoints() >= module.GetCost() * 2)
+        {
+            insufficientPointsTM.gameObject.SetActive(false);
+            PlaySelectSound();
+            module.Upgrade();
+            SetUpgradeModule(module);
+            player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
+            player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
+        } else
+        {
+            insufficientPointsTM.gameObject.SetActive(true);
+        }
     }
 
     public void SetUpgradeModule(UpgradeModule module)
@@ -51,5 +63,6 @@ public class UpgradeDescViewholder : MonoBehaviour
         nextLevelTM.text = ">>> Level " + nextLevel.ToString();
         valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
         costTM.text = cost.ToString() + " pts";
+        
     }
 }
