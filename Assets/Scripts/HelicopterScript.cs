@@ -16,7 +16,7 @@ public class HelicopterScript : MonoBehaviour
     private float maxVolume = 1.0f;
     private float speed = 10.0f;
 
-    private float buffer = 5f;
+    private float buffer = 3f;
 
     IEnumerator Depart()
     {
