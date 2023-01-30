@@ -16,18 +16,21 @@ public class HelicopterScript : MonoBehaviour
     private float maxVolume = 1.0f;
     private float speed = 10.0f;
 
+    private float buffer = 5f;
+
     IEnumerator Depart()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(30f);
         Destroy(gameObject);
     }
 
     private void Update()
     {
-        if (Time.timeScale == 1f)
+        if (Time.time > buffer && Time.timeScale == 1f)
         {
+            float currentSpeed = Mathf.Lerp(0, speed, 1f * Time.deltaTime);
             fanblades.transform.Rotate(Vector3.up * fanSpeed * Time.deltaTime, Space.World);
-            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(1, 0, 0) * currentSpeed;
 
             float distance = Vector3.Distance(transform.position, player.transform.position);
             audioSource.volume = Mathf.Lerp(maxVolume, minVolume, distance / maxDistance);

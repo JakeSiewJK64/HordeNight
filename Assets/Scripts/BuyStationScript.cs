@@ -53,18 +53,20 @@ public class BuyStationScript : MonoBehaviour
             if(selectedItem.itemType == ItemType.Weapon)
             {
                 if (GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice &&
-                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon() != null &&
+                    (GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon() != null &&
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon().name == selectedItem.name ||
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon() != null &&
-                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name)
+                    GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name))
                 {
                     // check if reserve ammo less than starting, enable buy ammo if true
+                    Debug.Log("true or not: " + (GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice));
+                    Debug.Log("player pooints: " + GetComponent<PlayerPointScript>().GetPoints());
                     buyButton.gameObject.SetActive(false);
                     buyAmmo.gameObject.SetActive(true);
                     return;
                 }
                 else
-                {
+                {                    
                     if (gameObject.GetComponent<PlayerPointScript>().GetPoints() >= selectedItem.price)
                     {
                         buyButton.gameObject.SetActive(true);
