@@ -20,7 +20,7 @@ public class BuyStationScript : MonoBehaviour
     private float ammoPrice = 1000f;
     public bool interacting = false;
 
-    private string audioPath = "Raw\\Sound\\SoundEffects\\menuSelect";
+    private string audioPath = "Raw\\Sound\\SoundEffects\\";
 
     private void Start()
     {
@@ -59,8 +59,6 @@ public class BuyStationScript : MonoBehaviour
                     GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon().name == selectedItem.name))
                 {
                     // check if reserve ammo less than starting, enable buy ammo if true
-                    Debug.Log("true or not: " + (GetComponent<PlayerPointScript>().GetPoints() >= ammoPrice));
-                    Debug.Log("player pooints: " + GetComponent<PlayerPointScript>().GetPoints());
                     buyButton.gameObject.SetActive(false);
                     buyAmmo.gameObject.SetActive(true);
                     return;
@@ -157,7 +155,12 @@ public class BuyStationScript : MonoBehaviour
 
     private void PlaySelectSound()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath)));
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath, "menuSelect")));
+    }
+    
+    private void PlayBuySound()
+    {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(audioPath, "purchase")));
     }
 
     public void UpdateDescriptionPanel(Item item)
@@ -170,6 +173,7 @@ public class BuyStationScript : MonoBehaviour
 
     private void BuyWeapon()
     {
+        PlayBuySound();
         if (((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY)
         {
             gameObject.GetComponent<PlayerInventoryScript>().GetPlayerInventory().SetPrimaryWeapon((WeaponClass)selectedItem);
@@ -194,7 +198,9 @@ public class BuyStationScript : MonoBehaviour
 
     public void OnBuyAmmoButton()
     {
+        PlayBuySound();
         WeaponClass weapon = null;
+
         if(((WeaponClass)selectedItem).weaponHolding == WeaponHolding.PRIMARY)
         {
             weapon = ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetPrimaryWeapon());
@@ -202,7 +208,7 @@ public class BuyStationScript : MonoBehaviour
         {
             weapon = ((WeaponClass)GetComponent<PlayerInventoryScript>().GetPlayerInventory().GetSecondaryWeapon());
         }
-        weapon.reserveAmmo = weapon.startingAmmo;
+        weapon.reserveAmmo += weapon.startingAmmo;
         gameObject.GetComponent<PlayerPointScript>().DeductPoints(ammoPrice);
     }
 

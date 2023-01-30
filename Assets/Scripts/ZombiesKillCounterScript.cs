@@ -6,6 +6,7 @@ public class ZombiesKillCounterScript : MonoBehaviour
     private int maxZombies;
     private int round;
     private int bloodmoon;
+    private int rewardPoints;
 
     public int GetMaxZombies()
     {
@@ -15,6 +16,8 @@ public class ZombiesKillCounterScript : MonoBehaviour
     public void ChangeRound()
     {
         GetComponent<ZombiesKillCounterScript>().round++;
+        rewardPoints = (round - 1) * 100;
+        GetComponent<PlayerPointScript>().IncrementPoints(rewardPoints);
         maxZombies += GetComponent<ZombiesKillCounterScript>().round * 2;
     }
 
