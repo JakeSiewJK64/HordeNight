@@ -600,6 +600,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5754027458380679405, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5756327856112638988, guid: e5af75a1f190fc548ad41fa5242e86fe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 27.255554
