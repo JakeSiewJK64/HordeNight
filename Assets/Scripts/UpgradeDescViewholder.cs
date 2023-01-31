@@ -17,7 +17,7 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     private void Start()
     {
-        insufficientPointsTM.gameObject.SetActive(false);
+        insufficientPointsTM.gameObject.SetActive(true);
     }
 
     private void PlaySelectSound()
@@ -41,7 +41,7 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     public void SetUpgradeModule(UpgradeModule module)
     {
-        this.module = module;
+        this.module = module;        
         UpdateDescription();
     }
 
