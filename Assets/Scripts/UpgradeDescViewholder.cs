@@ -17,7 +17,7 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     private void Start()
     {
-        insufficientPointsTM.gameObject.SetActive(true);
+        insufficientPointsTM.gameObject.SetActive(false);
     }
 
     private void PlaySelectSound()
@@ -27,13 +27,17 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     public void OnViewholderClick()
     {
-        if(player.GetComponent<PlayerPointScript>().GetPoints() >= module.GetCost() * 2 && module.GetLevel() < module.GetMaxLevel())
+        Debug.Log(player.GetComponent<PlayerPointScript>().GetPoints() == module.GetCost() * 2);
+        if (player.GetComponent<PlayerPointScript>().GetPoints() >= module.GetCost() * 2 && module.GetLevel() < module.GetMaxLevel())
         {
-            insufficientPointsTM.gameObject.SetActive(false);
             PlaySelectSound();
             module.Upgrade();
             player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
             player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
+        }
+        else
+        {
+            insufficientPointsTM.gameObject.SetActive(true);
         }
 
         SetUpgradeModule(module);
@@ -55,18 +59,17 @@ public class UpgradeDescViewholder : MonoBehaviour
 
     private void UpdateDescription()
     {
+        valueTM.text = "";
         if (module.GetLevel() + 1 > module.GetMaxLevel())
         {
             nextLevelTM.text = "Max";
-            valueTM.text = "";
             costTM.text = "";
             insufficientPointsTM.gameObject.SetActive(false);
         }
         else
         {
             nextLevelTM.text = ">>> Level " + (module.GetLevel() + 1);
-            valueTM.text = Math.Round(module.GetValue() + (module.GetValue() * .25f), 2) + "%";
-            costTM.text = module.GetCost().ToString() + " pts";
+            costTM.text = (module.GetCost() * 2).ToString() + " pts";
             insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < (module.GetCost() * 2));
         }
     }
