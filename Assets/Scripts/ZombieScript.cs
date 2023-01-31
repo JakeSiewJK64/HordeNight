@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class ZombieScript : MonoBehaviour
@@ -11,6 +12,8 @@ public class ZombieScript : MonoBehaviour
     private ZombiesKillCounterScript counter;
     private PlayerPointScript playerPoints;
     private PlayerZombiehealthIndicatorScript indicator;
+
+    private string soundPath = "Raw\\Sound\\Zombie\\";
 
     private void Start()
     {
@@ -46,6 +49,13 @@ public class ZombieScript : MonoBehaviour
             {
                 zombieController.SetBool("Attacking", true);
                 collision.gameObject.GetComponent<PlayerHealthScript>().TakeDamage(zombie.damage);
+
+                if(!GetComponent<AudioSource>().isPlaying)
+                {
+                    string voice = Random.Range(0, 5) == 0 ? "zombie_quick" : "zombie_long";
+                    GetComponent<AudioSource>().PlayOneShot(Resources.Load<AudioClip>(Path.Combine(soundPath, voice)));
+                }
+
                 return;
             } else
             {
