@@ -11,7 +11,7 @@ public class UpgradeDescViewholder : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    private string audioPath = "Raw\\Sound\\SoundEffects\\menuSelect";
+    private string audioPath = "Raw\\Sound\\SoundEffects\\upgrade";
 
     private UpgradeModule module;
 
@@ -34,21 +34,15 @@ public class UpgradeDescViewholder : MonoBehaviour
             module.Upgrade();
             player.GetComponent<UpgradeStationScript>().UpdateUpgradeItems();
             player.GetComponent<PlayerPointScript>().DeductPoints(module.GetCost());
-        } else
-        {
-            insufficientPointsTM.gameObject.SetActive(true);
         }
+
         SetUpgradeModule(module);
     }
 
     public void SetUpgradeModule(UpgradeModule module)
     {
         this.module = module;
-        insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
-        UpdateDescription(nextLevel: module.GetLevel() + 1,
-            value: module.GetValue() + (module.GetValue() * .25f),
-            cost: module.GetCost() * 2
-        );
+        UpdateDescription();
     }
 
     public void UpdateUpgradeName(string name)
@@ -59,9 +53,9 @@ public class UpgradeDescViewholder : MonoBehaviour
         }
     }
 
-    private void UpdateDescription(int nextLevel, double value, float cost)
+    private void UpdateDescription()
     {
-        if (nextLevel > module.GetMaxLevel())
+        if (module.GetLevel() + 1 > module.GetMaxLevel())
         {
             nextLevelTM.text = "Max";
             valueTM.text = "";
@@ -70,10 +64,10 @@ public class UpgradeDescViewholder : MonoBehaviour
         }
         else
         {
-            nextLevelTM.text = ">>> Level " + nextLevel.ToString();
-            valueTM.text = Math.Round(value + (value * .25f), 2) + "%";
-            costTM.text = cost.ToString() + " pts";
-            insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < module.GetCost() * 2);
+            nextLevelTM.text = ">>> Level " + (module.GetLevel() + 1);
+            valueTM.text = Math.Round(module.GetValue() + (module.GetValue() * .25f), 2) + "%";
+            costTM.text = module.GetCost().ToString() + " pts";
+            insufficientPointsTM.gameObject.SetActive(player.GetComponent<PlayerPointScript>().GetPoints() < (module.GetCost() * 2));
         }
     }
 }
